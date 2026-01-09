@@ -62,6 +62,7 @@ export default function MyPage() {
       const response = await selectRecentOrder();
       return response;
     },
+    refetchOnMount: "always",
   });
 
   // 닉네임 중복확인 query
@@ -380,8 +381,7 @@ export default function MyPage() {
   });
 
   return (
-
- <div className="bg-[#f5f3f0] pt-20 pb-23">
+    <div className="bg-[#f5f3f0] pt-20 pb-23">
       {/* 로딩 스피너 */}
       {isCheckingNickname && (
         <LoadingSpinner message="닉네임 중복체크 중..." position="top-right" />
@@ -643,15 +643,15 @@ export default function MyPage() {
                 ))}
             </div>
 
-              {/* 구분선 + 전체 주문 보기 */}
-              <div className="border-t border-[#e5e7eb] pt-4 mt-6 text-center">
-                <button
-                  onClick={handleViewAllOrders}
-                  className="text-[15px] font-medium text-[#6a7282] hover:text-[#4a5565] transition-colors"
-                >
-                  전체 주문 보기 
-                </button>
-              </div>
+            {/* 구분선 + 전체 주문 보기 */}
+            <div className="border-t border-[#e5e7eb] pt-4 mt-6 text-center">
+              <button
+                onClick={handleViewAllOrders}
+                className="text-[15px] font-medium text-[#6a7282] hover:text-[#4a5565] transition-colors"
+              >
+                전체 주문 보기
+              </button>
+            </div>
           </div>
         </div>
       </div>
