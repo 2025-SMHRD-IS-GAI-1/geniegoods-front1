@@ -1,0 +1,6 @@
+/* 반응형 카드 높이 보정 (선택) */
+@media (min-width: 768px) {
+  .card {
+    min-height: 480px;
+  }
+}
