@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   TrashIcon,
   ArrowDownTrayIcon,
@@ -22,6 +23,7 @@ import { useAuthStore } from "../stores/authStore";
 
 export default function MyGoodsPage() {
   const [goods, setGoods] = useState([]);
+  const navigate = useNavigate();
 
   // 주소 검색 훅 사용
   const { addressInfo, setAddressInfo, handleAddressSearch } =
@@ -333,7 +335,7 @@ export default function MyGoodsPage() {
         <Toast
           type={toastOption.type}
           message={toastOption.message}
-          position= "top-right"
+          position="top-right"
           duration={toastOption.duration}
           onClose={() => setToastOption({ ...toastOption, show: false })}
         />
@@ -344,19 +346,18 @@ export default function MyGoodsPage() {
           내가 생성한 굿즈
         </h1>
 
-      <div className="flex gap-10 items-start">
+        <div className="flex gap-10 items-start">
           {/* 왼쪽: 굿즈 목록 */}
-        <div className="flex-1">
-           {/* 액션 바  */}
+          <div className="flex-1">
+            {/* 액션 바  */}
             <div className="flex items-center justify-end gap-4 mb-6">
-              
-            {/* 전체 선택 */}
-          <div className="flex items-center gap-2">
-          <input
-            type="checkbox"
-            checked={allSelected}
-            onChange={(e) => handleSelectAll(e.target.checked)}
-            className="
+              {/* 전체 선택 */}
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={allSelected}
+                  onChange={(e) => handleSelectAll(e.target.checked)}
+                  className="
               appearance-none
               w-5 h-5
               rounded-[4px]
@@ -371,9 +372,10 @@ export default function MyGoodsPage() {
               checked:before:text-[14px]
               checked:before:font-extrabold
               focus:outline-none
-            "/>
-            <span className="text-[18px] text-[#0a0a0a]">전체 선택</span>
-          </div>
+            "
+                />
+                <span className="text-[18px] text-[#0a0a0a]">전체 선택</span>
+              </div>
 
               {/* 선택됨 뱃지 */}
               <div className="bg-[#f3f4f6] rounded-full px-3 py-1.5">
@@ -388,7 +390,9 @@ export default function MyGoodsPage() {
                 className="bg-white border border-[#e5e7eb] h-10 px-4 rounded-xl flex items-center gap-2 hover:bg-gray-50 transition-colors shadow-sm"
               >
                 <TrashIcon className="w-[18px] h-[18px] text-[#4b5563]" />
-                <span className="text-[14px] text-[#0a0a0a] font-medium">삭제</span>
+                <span className="text-[14px] text-[#0a0a0a] font-medium">
+                  삭제
+                </span>
               </button>
 
               {/* 다운로드 버튼 */}
@@ -397,23 +401,26 @@ export default function MyGoodsPage() {
                 className="bg-white border border-[#e5e7eb] h-10 px-4 rounded-xl flex items-center gap-2 hover:bg-gray-50 transition-colors shadow-sm"
               >
                 <ArrowDownTrayIcon className="w-4 h-4 text-[#4b5563]" />
-                <span className="text-[14px] text-[#0a0a0a] font-medium">다운로드</span>
+                <span className="text-[14px] text-[#0a0a0a] font-medium">
+                  다운로드
+                </span>
               </button>
             </div>
 
             {/* 굿즈 카드 그리드 */}
-           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
               {goods.map((item) => (
-           <div
-            key={item.id}
-            className="bg-white rounded-[16px] shadow-[0px_4px_6px_0px_rgba(0,0,0,0.1)] w-full max-w-[400px] overflow-hidden relative">
-              {/* 체크박스 */}
-              <div className="absolute top-3 left-3 z-10">
-                <input
-                  type="checkbox"
-                  checked={item.checked}
-                  onChange={() => handleToggleCheck(item.id)}
-                  className="
+                <div
+                  key={item.id}
+                  className="bg-white rounded-[16px] shadow-[0px_4px_6px_0px_rgba(0,0,0,0.1)] w-full max-w-[400px] overflow-hidden relative"
+                >
+                  {/* 체크박스 */}
+                  <div className="absolute top-3 left-3 z-10">
+                    <input
+                      type="checkbox"
+                      checked={item.checked}
+                      onChange={() => handleToggleCheck(item.id)}
+                      className="
                     appearance-none
                     w-5 h-5
                     rounded-[4px]
@@ -427,15 +434,17 @@ export default function MyGoodsPage() {
                     checked:before:text-white
                     checked:before:text-[14px]
                     checked:before:font-extrabold
-                    focus:outline-none"/>
-                </div>
+                    focus:outline-none"
+                    />
+                  </div>
 
                   {/* 이미지 */}
                   <div className="bg-[#f5f0eb] aspect-[3/4] mb-1  flex items-center justify-center overflow-hidden rounded-t-[16px]">
                     <img
                       src={item.image}
-                     alt={`굿즈 ${item.id}`} 
-                    className="w-full h-full object-covertransition-transform duration-300 hover:scale-105" />
+                      alt={`굿즈 ${item.id}`}
+                      className="w-full h-full object-covertransition-transform duration-300 hover:scale-105"
+                    />
                   </div>
 
                   {/* 수량 선택기 */}
@@ -482,7 +491,7 @@ export default function MyGoodsPage() {
           </div>
 
           {/* 오른쪽: 배송 정보 및 주문 정보 */}
-        <div className="w-full max-w-[400px] bg-white rounded-[16px] shadow-[0px_4px_6px_0px_rgba(0,0,0,0.1)] p-6 h-fit sticky top-10">
+          <div className="w-full max-w-[400px] bg-white rounded-[16px] shadow-[0px_4px_6px_0px_rgba(0,0,0,0.1)] p-6 h-fit sticky top-10">
             {/* 배송 정보 */}
             <div>
               <h2 className="text-[20px] text-[#0a0a0a] mb-6">배송 정보</h2>
@@ -673,13 +682,7 @@ export default function MyGoodsPage() {
                 try {
                   await createOrder(orderDataWithMethod);
 
-                  // 성공 메시지 표시
-                  setToastOption({
-                    type: "success",
-                    show: true,
-                    message: "주문이 완료되었습니다!",
-                    duration: 3000,
-                  });
+                  navigate("/orders");
                 } catch (error) {
                   console.error("주문 생성 실패:", error);
                   setToastOption({

@@ -45,6 +45,7 @@ export default function OrderAllListPage() {
       });
       return response;
     },
+    refetchOnMount: "always",
   });
 
   // 기간 변경 시 첫 페이지로 리셋
