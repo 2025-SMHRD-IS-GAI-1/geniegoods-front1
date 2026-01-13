@@ -202,7 +202,6 @@ export default function MainPage() {
     </div>
   </div>
 </section>
-
       {/* CTA 배너 */}
       <div className="bg-[#b89a7c]">
         <div className="text-center py-8">
