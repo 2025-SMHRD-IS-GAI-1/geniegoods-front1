@@ -1,11 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-// Figma에서 가져온 아이콘 URL들
-const imgIcon =
-  "http://localhost:3845/assets/fd8a5cfce30b1a36a8952ec69b094d8555c59a03.svg";
-const imgIcon1 =
-  "http://localhost:3845/assets/738bc4a4de825974a87b0648e59c6cc83c2738c9.svg";
+import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 
 // FAQ 데이터
 const faqData = [
@@ -42,10 +37,15 @@ const faqData = [
 
 export default function QuestionPage() {
   const navigate = useNavigate();
-  const [openId, setOpenId] = useState(1); // 첫 번째 질문이 기본으로 열려있음
+  const [openIdList, setOpenIdList] = useState([]); // 첫 번째 질문이 기본으로 열려있음
 
   const toggleQuestion = (id) => {
-    setOpenId(openId === id ? null : id);
+    if (openIdList.includes(id)) {
+      setOpenIdList(openIdList.filter((item) => item !== id));
+    } else {
+      setOpenIdList([...openIdList, id]);
+    }
+    console.log(openIdList);
   };
 
   const handleBackToMain = () => {
@@ -53,7 +53,7 @@ export default function QuestionPage() {
   };
 
   return (
-    <div className="bg-[#f5f3f0] min-h-screen">
+    <div className="bg-[#f5f3f0] h-[calc(100vh-124px)]">
       <div className="max-w-[1440px] mx-auto px-8 py-8">
         {/* 페이지 제목 */}
         <div className="text-center mb-8">
@@ -70,7 +70,7 @@ export default function QuestionPage() {
           <div className="bg-white border border-[#d1d5dc] rounded-[24px] p-8">
             <div className="space-y-3">
               {faqData.map((faq) => {
-                const isOpen = openId === faq.id;
+                const isOpen = openIdList.includes(faq.id);
                 return (
                   <div
                     key={faq.id}
@@ -89,13 +89,16 @@ export default function QuestionPage() {
                         {faq.question}
                       </span>
                       <div className="flex-shrink-0 ml-4">
-                        <img
-                          src={isOpen ? imgIcon : imgIcon1}
-                          alt={isOpen ? "접기" : "펼치기"}
-                          className={`w-5 h-5 transition-transform ${
-                            isOpen ? "rotate-180" : ""
-                          }`}
-                        />
+                        {/* 화살표 */}
+                        {isOpen ? (
+                          <ChevronUpIcon
+                            className={`w-5 h-5 transition-transfrom`}
+                          />
+                        ) : (
+                          <ChevronDownIcon
+                            className={`w-5 h-5 transition-transform`}
+                          />
+                        )}
                       </div>
                     </button>
 

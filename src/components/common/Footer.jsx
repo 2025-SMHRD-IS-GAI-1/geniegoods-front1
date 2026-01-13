@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="w-full border-t border-[#eee] bg-white">
+    <footer className="w-full border-t border-[#eee] h-14 bg-white">
       <div className="max-w-[1440px] mx-auto px-8">
         <div className="flex items-center justify-between pt-[18px] pb-[14px]">
           {/* 왼쪽: 고객지원 */}
