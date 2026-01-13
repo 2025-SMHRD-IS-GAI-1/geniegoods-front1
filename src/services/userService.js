@@ -16,17 +16,16 @@ export const apiClient = axios.create({
 });
 
 /**
- * 요청 인터셉터: 모든 요청 헤더에 Zustand에 저장된 토큰을 자동으로 추가
+ * 응답 인터셉터: 401 에러 시 인증 상태 초기화
+ * httpOnly 쿠키 기반 인증 사용 (토큰은 쿠키에 자동으로 포함됨)
  */
-apiClient.interceptors.request.use(
-  (config) => {
-    const token = useAuthStore.getState().accessToken;
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
+apiClient.interceptors.response.use(
+  (response) => response,
   (error) => {
+    if (axios.isAxiosError(error) && error.response?.status === 401) {
+      // 401 Unauthorized 에러 시 인증 상태 초기화
+      useAuthStore.getState().clearAuth();
+    }
     return Promise.reject(error);
   }
 );
