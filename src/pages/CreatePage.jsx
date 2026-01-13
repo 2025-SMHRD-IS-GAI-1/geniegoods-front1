@@ -323,7 +323,7 @@ export default function CreatePage() {
           {/* 왼쪽 메인 영역 */}
         <div className="flex-1 overflow-hidden mt-0">
             {/* 제목 섹션 */}
-            <div className="mb-6 mt-4">
+            <div className="mb-10 mt-6">
               <h1 className="text-[28px] font-bold text-[#2d2520] leading-[42px] mb-2">
                 굿즈만들기
               </h1>
@@ -335,7 +335,7 @@ export default function CreatePage() {
             {/* 메인 카드 */}
             <div className="bg-white border border-[#e5e7eb] rounded-[16px] shadow-lg p-6">
               {/* 이미지 업로드 영역 */}
-             <div className="bg-gradient-to-b from-[#fafaf8] to-[#f5f0eb] border border-[#e2e8f0] rounded-[14px] h-[360px] flex items-center justify-center mb-5 relative overflow-hidden">
+             <div className="bg-gradient-to-b from-[#fafaf8] to-[#f5f0eb] border border-[#e2e8f0] rounded-[14px] h-[360px] flex items-center justify-center mb-8 relative overflow-hidden">
                 {resultImage ? (
                   <img
                     src={resultImage}
@@ -369,7 +369,7 @@ export default function CreatePage() {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="예: 귀여운 강아지가 있는 파스텔톤 키링 디자인을 만들어주세요"
-                className="w-full h-[90px] bg-transparent border-none outline-none resize-none text-[15px] text-[#99a1af] placeholder:text-[#99a1af] leading-[24.375px]"
+                className="w-full h-[90px] bg-transparent border-none outline-none resize-none text-[15px] text-[#4b5563] placeholder:text-[#99a1af] leading-[24.375px]"
                 />
                 <div className="border-t border-[#e2e8f0] pt-3 flex items-center justify-end">
                   <button
@@ -386,7 +386,7 @@ export default function CreatePage() {
                         selectedOption.category === "" ||
                         uploadedImages.length === 0
                           ? "bg-[#f1f3f5] text-black opacity-70 cursor-default"
-                          : "bg-[#007bff] text-white hover:shadow-md cursor-pointer"
+                          : "bg-[#b08c6f] text-white hover:shadow-md cursor-pointer"
                       }
                     `}
                   >
@@ -398,7 +398,7 @@ export default function CreatePage() {
           </div>
 
           {/* 오른쪽 사이드바 */}
-         <div className="w-[380px] min-h-full bg-[#fafaf8] border-l border-[#d1d5dc] p-10 flex flex-col gap-2">
+         <div className="w-[380px] min-h-full bg-[#fafaf8] border-l border-[#d1d5dc] p-10 flex flex-col gap-4">
             <div>
               <div className="flex items-center gap-2 mb-3">
                 <h3 className="text-[13px] font-bold text-[#0a0a0a]">
