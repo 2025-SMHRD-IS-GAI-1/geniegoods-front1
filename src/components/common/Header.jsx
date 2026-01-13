@@ -81,7 +81,7 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-white border-b border-[#e5e7eb] h-[56px] w-full relative z-50">
+    <header className="bg-white border-b border-[#e5e7eb] h-14 w-full relative z-50">
       <div className="h-full flex items-center justify-between px-4 md:px-8 max-w-[1440px] mx-auto">
         {/* 왼쪽: 로고 + 네비 */}
         <div className="flex items-center gap-8">
