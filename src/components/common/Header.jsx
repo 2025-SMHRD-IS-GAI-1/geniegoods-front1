@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../stores/authStore";
 import { logout, getCurrentUser } from "../../services/authService";
@@ -6,26 +6,78 @@ import defaultProfileIcon from "../../assets/img/defaultProfileIcon.png";
 
 export default function Header() {
   const navigate = useNavigate();
-  const { isAuthenticated, user, setUser } = useAuthStore();
+  const {
+    isAuthenticated,
+    user,
+    setUser,
+    clearAuth,
+    isLoggingOut,
+    setLoggingOut,
+  } = useAuthStore();
+  const hasProcessed = useRef(false);
 
-  // 사용자 정보 로드
+  // 사용자 정보 로드 (쿠키 기반 인증)
   useEffect(() => {
-    if (isAuthenticated && !user) {
-      getCurrentUser()
-        .then((userData) => {
-          setUser(userData);
-        })
-        .catch((error) => {
-          console.error("사용자 정보 로드 실패:", error);
-        });
+    // 로그아웃 중이면 사용자 정보를 확인하지 않음
+    if (isLoggingOut) {
+      return;
     }
-    console.log(isAuthenticated);
-  }, [isAuthenticated, user, setUser]);
+
+    // user가 이미 있으면 인증 확인 완료
+    if (user) {
+      hasProcessed.current = true;
+      return;
+    }
+
+    // 이미 처리했으면 중복 실행 방지
+    if (hasProcessed.current) {
+      return;
+    }
+
+    // 처리 시작 표시
+    hasProcessed.current = true;
+
+    // 쿠키에 토큰이 있는지 확인하기 위해 사용자 정보 조회
+    // 성공하면 인증된 것으로 간주
+    getCurrentUser()
+      .then((userData) => {
+        // 사용자 정보가 있으면 설정
+        if (userData) {
+          setUser(userData);
+        }
+        hasProcessed.current = true;
+      })
+      .catch((error) => {
+        // 사용자 정보 로드 실패 시 명시적으로 인증 상태 초기화
+        // 401 에러는 정상적인 로그아웃 상태이므로 로그를 남기지 않음
+        const status = error?.response?.status || error?.status;
+        if (status !== 401) {
+          console.error("사용자 정보 로드 실패:", error);
+        }
+        // 인증 상태 확실히 초기화
+        clearAuth();
+        // 로그아웃 상태로 간주하여 다시 호출하지 않도록
+        hasProcessed.current = true;
+      });
+  }, [user, setUser, clearAuth, isLoggingOut]);
 
   const handleLogout = async () => {
-    // 백엔드 성공 여부와 관계없이 Zustand Store 초기화
-    useAuthStore.getState().clearAuth();
-    navigate("/login");
+    // 로그아웃 시작 플래그 설정 (즉시 UI 업데이트)
+    setLoggingOut(true);
+    // 상태 초기화
+    clearAuth();
+
+    try {
+      // 로그아웃 API 호출 (쿠키 삭제)
+      await logout();
+    } catch (error) {
+      console.error("로그아웃 처리 중 오류:", error);
+    }
+
+    // 약간의 지연 후 페이지 새로고침 (상태 업데이트가 완료되도록)
+    setTimeout(() => {
+      window.location.replace("/login");
+    }, 100);
   };
 
   return (
@@ -73,7 +125,7 @@ export default function Header() {
         </div>
 
         {/* 오른쪽: 사용자 정보 */}
-        {isAuthenticated ? (
+        {!isLoggingOut && user && user.nickname ? (
           <div className="hidden md:flex items-center gap-4">
             <div className="flex items-center gap-3">
               {/* 프로필 이미지 또는 이니셜 */}

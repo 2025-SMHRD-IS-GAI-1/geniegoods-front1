@@ -6,6 +6,7 @@ const API_BASE_URL = getBaseUrl();
 
 /**
  * axios 인스턴스 생성
+ * httpOnly 쿠키 기반 인증 사용 (토큰은 쿠키에 자동으로 포함됨)
  */
 export const apiClient = axios.create({
   baseURL: API_BASE_URL,
@@ -16,56 +17,62 @@ export const apiClient = axios.create({
 });
 
 /**
- * 요청 인터셉터: 모든 요청 헤더에 Zustand에 저장된 토큰을 자동으로 추가
+ * 응답 인터셉터: 401 에러 시 refreshToken으로 accessToken 갱신 시도
  */
-apiClient.interceptors.request.use(
-  (config) => {
-    const token = useAuthStore.getState().accessToken;
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+apiClient.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+
+    if (axios.isAxiosError(error) && error.response?.status === 401) {
+      // refresh 엔드포인트 자체가 401이면 무한 루프 방지
+      if (originalRequest.url?.includes("/refresh")) {
+        useAuthStore.getState().clearAuth();
+        return Promise.reject(error);
+      }
+
+      // /api/user/me는 사용자 정보 확인용이므로 refresh 시도하지 않음
+      // (로그아웃 상태에서 호출될 수 있음)
+      if (originalRequest.url?.includes("/api/user/me")) {
+        useAuthStore.getState().clearAuth();
+        return Promise.reject(error);
+      }
+
+      // 이미 재시도한 요청이면 무한 루프 방지
+      if (originalRequest._retry) {
+        useAuthStore.getState().clearAuth();
+        return Promise.reject(error);
+      }
+
+      originalRequest._retry = true;
+
+      try {
+        // refreshToken으로 accessToken 갱신 시도
+        await apiClient.post("/api/user/refresh");
+        // 갱신 성공 시 원래 요청 재시도
+        return apiClient(originalRequest);
+      } catch (refreshError) {
+        // refreshToken도 만료된 경우 로그아웃
+        useAuthStore.getState().clearAuth();
+        return Promise.reject(refreshError);
+      }
     }
-    return config;
-  },
-  (error) => {
+
     return Promise.reject(error);
   }
 );
 
 /**
- * 로그인 API 호출
- * @param {Object} loginData - { loginId, password }
- * @returns {Promise<Object>} { nickname, accessToken }
- */
-export const login = async (loginData) => {
-  try {
-    const response = await apiClient.post("/api/members/login", loginData);
-    return response.data;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      // 서버에서 내려주는 에러 메시지가 문자열이면 사용, 아니면 기본 메시지
-      const errorMessage =
-        (typeof error.response?.data === "string"
-          ? error.response.data
-          : null) ||
-        error.message ||
-        "로그인에 실패했습니다.";
-      throw new Error(errorMessage);
-    }
-    throw new Error("로그인에 실패했습니다.");
-  }
-};
-
-/**
  * 로그아웃 API 호출
- * 서버에 로그아웃 알림 후 클라이언트의 Zustand 상태(토큰 등) 초기화
+ * 서버에서 httpOnly 쿠키 삭제
+ * 주의: clearAuth()는 호출하지 않음 (호출하는 쪽에서 처리)
  */
 export const logout = async () => {
   try {
-    await apiClient.post("/api/members/logout");
+    await apiClient.post("/api/user/logout");
   } catch (error) {
-    // 로그아웃 실패 시에도 사용자 경험을 위해 클라이언트 상태는 지워주는 것이 좋음
-    console.error("Logout API error:", error);
-  } finally {
+    // 쿠키는 이미 삭제되었을 수 있으므로 에러는 무시
+    console.error("로그아웃 API 호출 실패:", error);
   }
 };
 
@@ -93,6 +100,14 @@ export const getCurrentUser = async () => {
     const response = await apiClient.get("/api/user/me");
     return response.data;
   } catch (error) {
+    // 401 에러는 인증되지 않은 상태이므로 그대로 전달
+    if (axios.isAxiosError(error) && error.response?.status === 401) {
+      const authError = new Error("Unauthorized");
+      authError.response = error.response;
+      authError.status = 401;
+      throw authError;
+    }
+
     if (axios.isAxiosError(error)) {
       const errorMessage =
         error.response?.data?.message ||

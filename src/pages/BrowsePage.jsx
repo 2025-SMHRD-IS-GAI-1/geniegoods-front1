@@ -43,6 +43,7 @@ export default function BrowsePage() {
       );
       return response;
     },
+    refetchOnMount: "always",
     getNextPageParam: (lastPage, allPages) => {
       // 응답 배열의 길이가 PAGE_SIZE보다 작으면 마지막 페이지
       if (lastPage.length < PAGE_SIZE) {
@@ -62,6 +63,10 @@ export default function BrowsePage() {
     mutationFn: async (requestBody) => {
       const response = await selectGoodsDetail(requestBody.goodsId);
       return response;
+    },
+    onSuccess: (data) => {
+      console.log(data);
+      setSelectedGoods(data);
     },
   });
 
