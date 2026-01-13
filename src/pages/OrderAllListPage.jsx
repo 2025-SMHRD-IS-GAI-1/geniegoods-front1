@@ -111,18 +111,20 @@ export default function OrderAllListPage() {
   return (
     <div className="bg-[#f5f3f0] min-h-screen">
       <div className="max-w-[1200px] mx-auto px-8 py-8">
-        {/* 페이지 제목 */}
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-[28px] font-semibold text-[#2d2520]">
-            전체 주문 내역
-          </h1>
-          <button
-            onClick={() => navigate("/mypage")}
-            className="text-[14px] text-[#6a7282] hover:text-[#4a5565] transition-colors"
-          >
-            ← 마이페이지로 돌아가기
-          </button>
-        </div>
+      {/* 페이지 제목 */}
+      <div className="flex items-center justify-between mb-8">
+        <h1 className="text-[28px] font-semibold text-[#2d2520]">
+          전체 주문 내역
+        </h1>
+        <button
+          onClick={() => navigate("/mypage")}
+          className="border border-[#e6e6e6] bg-white text-[#7a7f87] px-3 py-1 text-[12px] rounded-[4px]  transition"
+        >
+          ← 마이페이지로 돌아가기
+        </button>
+
+      </div>
+
 
         {/* 필터 섹션 */}
         <div className="bg-white rounded-[16px] shadow-[0px_2px_8px_0px_rgba(0,0,0,0.1)] p-6 mb-6">
