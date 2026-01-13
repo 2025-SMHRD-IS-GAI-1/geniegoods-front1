@@ -135,76 +135,81 @@ export default function MainPage() {
       </section>
 
       {/* 프로세스 단계 섹션 */}
-      <section className="bg-white py-8 border-t border-[#eee]">
-        <div className="max-w-[1440px] mx-auto px-24">
-          <div className="flex items-center justify-between">
-            {/* STEP 1 */}
-            <div className="flex items-start gap-4 w-[360px]">
-              <div className="bg-[#b89a7c] text-white w-7 h-7 rounded-full flex items-center justify-center text-[13px] shrink-0">
-                1
-              </div>
-              <div>
-                <p className="text-[15px] font-semibold text-[#2d2520] mb-1">
-                  사진 업로드
-                </p>
-                <p className="text-[13px] text-[#6b7280] leading-[18px]">
-                  반려동물 사진을 여러 장 선택해
-                  <br />
-                  업로드합니다
-                </p>
-              </div>
-            </div>
-
-            {/* 화살표 */}
-            <div className="flex items-center justify-center w-[72px]">
-              <span className="text-[#4b443d] text-[28px] font-bold leading-none">
-                →
-              </span>
-            </div>
-
-            {/* STEP 2 */}
-            <div className="flex items-start gap-4 w-[360px]">
-              <div className="bg-[#8a8f98] text-white w-7 h-7 rounded-full flex items-center justify-center text-[13px] shrink-0">
-                2
-              </div>
-              <div>
-                <p className="text-[15px] font-semibold text-[#2d2520] mb-1">
-                  AI 자동완성
-                </p>
-                <p className="text-[13px] text-[#6b7280] leading-[18px]">
-                  AI가 사진을 분석해
-                  <br />
-                  하나의 장면을 완성합니다
-                </p>
-              </div>
-            </div>
-
-            {/* 화살표 */}
-            <div className="flex items-center justify-center w-[72px]">
-              <span className="text-[#4b443d] text-[28px] font-bold leading-none">
-                →
-              </span>
-            </div>
-
-            {/* STEP 3 */}
-            <div className="flex items-start gap-4 w-[360px]">
-              <div className="bg-[#b89a7c] text-white w-7 h-7 rounded-full flex items-center justify-center text-[13px] shrink-0">
-                3
-              </div>
-              <div>
-                <p className="text-[15px] font-semibold text-[#2d2520] mb-1">
-                  굿즈 완성
-                </p>
-                <p className="text-[13px] text-[#6b7280] leading-[18px]">
-                  완성된 이미지를
-                  <br />
-                  굿즈로 제작합니다
-                </p>
-              </div>
-            </div>
+<section className="bg-white py-8 border-t border-[#eee]">
+  <div className="max-w-[1440px] mx-auto px-24"> 
+    <div className="flex justify-end">
+      <div className="flex items-center gap-12 w-[820px] mr-8">
+        
+        {/* STEP 1 */}
+        <div className="flex items-start gap-4 w-[360px]">
+          <div className="bg-[#b89a7c] text-white w-7 h-7 rounded-full flex items-center justify-center text-[13px] shrink-0">
+            1
+          </div>
+          <div>
+            <p className="text-[15px] font-semibold text-[#2d2520] mb-1">
+              사진 업로드
+            </p>
+            <p className="text-[13px] text-[#6b7280] leading-[18px]">
+              반려동물 사진을 여러 장 선택해
+              <br />
+              업로드합니다
+            </p>
           </div>
         </div>
-      </section>
+
+        {/* 화살표 */}
+        <div className="flex items-center justify-center w-[72px]">
+          <span className="text-[#4b443d] text-[24px] font-bold leading-none">
+            →
+          </span>
+        </div>
+
+        {/* STEP 2 */}
+        <div className="flex items-start gap-4 w-[360px]">
+          <div className="bg-[#b89a7c] text-white w-7 h-7 rounded-full flex items-center justify-center text-[13px] shrink-0">
+            2
+          </div>
+          <div>
+            <p className="text-[15px] font-semibold text-[#2d2520] mb-1">
+              AI 자동완성
+            </p>
+            <p className="text-[13px] text-[#6b7280] leading-[18px]">
+              AI가 사진을 분석해
+              <br />
+              하나의 장면을 완성합니다
+            </p>
+          </div>
+        </div>
+
+        {/* 화살표 */}
+        <div className="flex items-center justify-center w-[72px]">
+          <span className="text-[#4b443d] text-[24px] font-bold leading-none">
+            →
+          </span>
+        </div>
+
+        {/* STEP 3 */}
+        <div className="flex items-start gap-4 w-[360px]">
+          <div className="bg-[#b89a7c] text-white w-7 h-7 rounded-full flex items-center justify-center text-[13px] shrink-0">
+            3
+          </div>
+          <div>
+            <p className="text-[15px] font-semibold text-[#2d2520] mb-1">
+              굿즈 완성
+            </p>
+            <p className="text-[13px] text-[#6b7280] leading-[18px]">
+              완성된 이미지를
+              <br />
+              굿즈로 제작합니다
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* CTA 배너 */}
       <div className="bg-[#b89a7c]">
