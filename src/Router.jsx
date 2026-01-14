@@ -12,6 +12,7 @@ import OrderAllListPage from "./pages/OrderAllListPage";
 import OrderDetailPage from "./pages/OrderDetailPage";
 import QuestionPage from "./pages/QuestionPage";
 import OAuthCallbackPage from "./pages/OAuthCallbackPage";
+import SubscribePage from "./pages/SubscribePage";
 
 export default function AppRouter() {
   return (
@@ -29,6 +30,7 @@ export default function AppRouter() {
           <Route path="/orders" element={<OrderAllListPage />} />
           <Route path="/orders/:orderId" element={<OrderDetailPage />} />
           <Route path="/question" element={<QuestionPage />} />
+          <Route path="/subscribe" element={<SubscribePage />} />
         </Route>
       </Routes>
     </BrowserRouter>
