@@ -424,7 +424,7 @@ export default function MyPage() {
             {/* 아이콘 */}
             <div className="flex justify-center mb-6">
               <div className="relative">
-                <div className="rounded-full w-28 h-28 flex items-center justify-center overflow-hidden">
+                <div className="rounded-full w-28 h-28 flex items-center justify-center overflow-hidden cursor-pointer">
                   <img
                     src={profileImage}
                     alt="프로필"
@@ -539,7 +539,7 @@ export default function MyPage() {
                 <button
                   onClick={handleCheckDuplicate}
                   disabled={isCheckingNickname || !nickname.trim()}
-                  className="bg-white border border-[rgba(0,0,0,0.1)] px-4 py-2 rounded-[8px] text-[14px] font-semibold text-[#0a0a0a] hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="bg-white border border-[rgba(0,0,0,0.1)] px-4 py-2 rounded-[8px] text-[14px] font-semibold text-[#0a0a0a] hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                 >
                   {isCheckingNickname ? "확인 중..." : "중복확인"}
                 </button>
@@ -553,7 +553,7 @@ export default function MyPage() {
             <button
               onClick={handleChangeNickname}
               disabled={!isNicknameAvailable}
-              className="w-full bg-[#bb4d00] text-white py-3 rounded-[10px] text-[14px] font-semibold hover:bg-[#a64400] transition-colors mb-6 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#bb4d00]"
+              className="w-full bg-[#bb4d00] text-white py-3 rounded-[10px] text-[14px] font-semibold hover:bg-[#a64400] transition-colors mb-6 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#bb4d00] cursor-pointer"
             >
               닉네임 변경
             </button>
@@ -565,14 +565,14 @@ export default function MyPage() {
             <div className="flex items-center justify-center gap-2 pt-3 text-[14px]">
               <button
                 onClick={handleFAQ}
-                className="font-medium text-[#4a5565] hover:text-[#2d2520] transition-colors"
+                className="font-medium text-[#4a5565] hover:text-[#2d2520] transition-colors cursor-pointer"
               >
                 자주묻는질문
               </button>
               <span className="text-[#d1d5dc] select-none">|</span>
               <button
                 onClick={handleWithdraw}
-                className="font-medium text-[#4a5565] hover:text-[#2d2520] transition-colors"
+                className="font-medium text-[#4a5565] hover:text-[#2d2520] transition-colors cursor-pointer"
               >
                 회원탈퇴
               </button>
@@ -626,15 +626,9 @@ export default function MyPage() {
                         <div className="flex gap-2">
                           <button
                             onClick={() => handleViewOrderDetail(order.orderId)}
-                            className="bg-[#b89a7c] text-white px-4 py-2 rounded-[10px] text-[14px] font-semibold hover:bg-[#a68a6c] transition-colors"
+                            className="bg-[#b89a7c] text-white px-4 py-2 rounded-[10px] text-[14px] font-semibold hover:bg-[#a68a6c] transition-colors cursor-pointer"
                           >
                             상세보기
-                          </button>
-                          <button
-                            onClick={() => handleCancelOrder(order.orderNumber)}
-                            className="bg-white border border-[#4a5565] text-[#6b6b6b] px-4 py-2 rounded-[10px] text-[14px] font-semibold hover:bg-gray-50 transition-colors"
-                          >
-                            주문 취소
                           </button>
                         </div>
                       </div>
@@ -647,7 +641,7 @@ export default function MyPage() {
             <div className="border-t border-[#e5e7eb] pt-4 mt-6 text-center">
               <button
                 onClick={handleViewAllOrders}
-                className="text-[15px] font-medium text-[#6a7282] hover:text-[#4a5565] transition-colors"
+                className="text-[15px] font-medium text-[#6a7282] hover:text-[#4a5565] transition-colors cursor-pointer"
               >
                 전체 주문 보기
               </button>

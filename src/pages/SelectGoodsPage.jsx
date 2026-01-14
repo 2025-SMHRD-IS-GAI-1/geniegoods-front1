@@ -290,8 +290,7 @@ export default function SelectGoodsPage() {
         <LoadingSpinner message="시안 삭제 중..." position="top-right" />
       )}
       {/* 토스트 */}
-      {toastOption.show &&
-      !createGoodsSampleMutation.isPending && (
+      {toastOption.show && !createGoodsSampleMutation.isPending && (
         <Toast
           type={toastOption.type}
           message={toastOption.message}
@@ -325,9 +324,9 @@ export default function SelectGoodsPage() {
                     isSelected ? "scale-[1.03] z-10" : "scale-95 opacity-70"
                   }`}
                 >
-                <div
-                onClick={() => handleSelect(design.id)}
-                className={`
+                  <div
+                    onClick={() => handleSelect(design.id)}
+                    className={`
                   relative
                   bg-white rounded-[20px]
                   cursor-pointer
@@ -339,17 +338,14 @@ export default function SelectGoodsPage() {
                       : "border border-transparent opacity-80 hover:opacity-100"
                   }
                 `}
-                style={{
-                  width: "320px",
-                  height: "460px",
-                }}
-              >
-
-
-
+                    style={{
+                      width: "320px",
+                      height: "460px",
+                    }}
+                  >
                     {/* 선택 표시 아이콘 */}
                     {isSelected && (
-                     <div className="absolute top-4 left-4 bg-[#b89a7c] rounded-full w-9 h-9 flex items-center justify-center shadow-md">
+                      <div className="absolute top-4 left-4 bg-[#b89a7c] rounded-full w-9 h-9 flex items-center justify-center shadow-md">
                         <svg
                           width="20"
                           height="20"
@@ -369,13 +365,13 @@ export default function SelectGoodsPage() {
                     )}
 
                     {/* 이미지 */}
-                   <div className="w-full h-full flex items-center justify-center p-6">
-                    <img
-                      src={design.image}
-                      alt={`시안 ${design.id}`}
-                      className="max-w-full max-h-full object-contain"
-                    />
-                  </div>
+                    <div className="w-full h-full flex items-center justify-center p-6">
+                      <img
+                        src={design.image}
+                        alt={`시안 ${design.id}`}
+                        className="max-w-full max-h-full object-contain"
+                      />
+                    </div>
                   </div>
                 </div>
               );
@@ -390,7 +386,7 @@ export default function SelectGoodsPage() {
         )}
 
         {/* 하단 버튼들 */}
-       <div className="flex items-center justify-center gap-4 mt-8">
+        <div className="flex items-center justify-center gap-4 mt-8">
           <button
             onClick={handleBack}
             className="bg-white border border-[#e5e7eb] h-[48px] px-8 rounded-[10px] text-[18px] text-[#364153] hover:bg-gray-50 transition-colors"

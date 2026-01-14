@@ -31,14 +31,14 @@ export default function MainPage() {
               <div className="flex items-center gap-4">
                 <button
                   onClick={() => navigate("/create")}
-                  className="bg-[#b89a7c] text-white px-6 py-3 rounded-full text-[16px] shadow hover:bg-[#a68a6c] transition flex items-center gap-2"
+                  className="bg-[#b89a7c] text-white px-6 py-3 rounded-full text-[16px] shadow hover:bg-[#a68a6c] transition flex items-center gap-2 cursor-pointer"
                 >
                   AI 굿즈 만들기
                 </button>
 
                 <button
                   onClick={() => navigate("/browse")}
-                  className="bg-white border border-[#8b7355] text-[#8b7355] px-6 py-3 rounded-full text-[15px] hover:bg-gray-50 transition"
+                  className="bg-white border border-[#8b7355] text-[#8b7355] px-6 py-3 rounded-full text-[15px] hover:bg-gray-50 transition cursor-pointer"
                 >
                   인기굿즈 둘러보기
                 </button>
@@ -134,74 +134,75 @@ export default function MainPage() {
         </div>
       </section>
 
-{/* 프로세스 단계 섹션 */}
-<section className="bg-white py-8 border-t border-[#eee]">
-  <div className="max-w-[1440px] mx-auto px-24">
-    <div className="flex justify-end">
-      <div className="flex items-center gap-12 w-[820px]">
-        
-        {/* STEP 1 */}
-        <div className="flex items-start gap-4 w-[360px]">
-          <div className="bg-[#b89a7c] text-white w-7 h-7 rounded-full flex items-center justify-center text-[13px] shrink-0">
-            1
-          </div>
-          <div>
-            <p className="text-[15px] font-medium text-[#3a332d] mb-1">
-              사진 업로드
-            </p>
-            <p className="text-[13px] text-[#6b7280] leading-[18px]">
-              반려동물 사진을 여러 장 선택해<br />
-              업로드합니다
-            </p>
+      {/* 프로세스 단계 섹션 */}
+      <section className="bg-white py-8 border-t border-[#eee]">
+        <div className="max-w-[1440px] mx-auto px-24">
+          <div className="flex justify-end">
+            <div className="flex items-center gap-12 w-[820px]">
+              {/* STEP 1 */}
+              <div className="flex items-start gap-4 w-[360px]">
+                <div className="bg-[#b89a7c] text-white w-7 h-7 rounded-full flex items-center justify-center text-[13px] shrink-0">
+                  1
+                </div>
+                <div>
+                  <p className="text-[15px] font-medium text-[#3a332d] mb-1">
+                    사진 업로드
+                  </p>
+                  <p className="text-[13px] text-[#6b7280] leading-[18px]">
+                    반려동물 사진을 여러 장 선택해
+                    <br />
+                    업로드합니다
+                  </p>
+                </div>
+              </div>
+
+              {/* → */}
+              <div className="flex items-center justify-center w-[72px]">
+                <span className="text-[#4b443d] text-[24px] font-bold">→</span>
+              </div>
+
+              {/* STEP 2 */}
+              <div className="flex items-start gap-4 w-[360px]">
+                <div className="bg-[#8a8f98] text-white w-7 h-7 rounded-full flex items-center justify-center text-[13px] shrink-0">
+                  2
+                </div>
+                <div>
+                  <p className="text-[15px] font-medium text-[#3a332d] mb-1">
+                    AI 자동완성
+                  </p>
+                  <p className="text-[13px] text-[#6b7280] leading-[18px]">
+                    AI가 사진을 분석해
+                    <br />
+                    하나의 장면을 완성합니다
+                  </p>
+                </div>
+              </div>
+
+              {/* → */}
+              <div className="flex items-center justify-center w-[72px]">
+                <span className="text-[#4b443d] text-[24px] font-bold">→</span>
+              </div>
+
+              {/* STEP 3 */}
+              <div className="flex items-start gap-4 w-[360px]">
+                <div className="bg-[#b89a7c] text-white w-7 h-7 rounded-full flex items-center justify-center text-[13px] shrink-0">
+                  3
+                </div>
+                <div>
+                  <p className="text-[15px] font-medium text-[#3a332d] mb-1">
+                    굿즈 완성
+                  </p>
+                  <p className="text-[13px] text-[#6b7280] leading-[18px]">
+                    완성된 이미지를
+                    <br />
+                    굿즈로 제작합니다
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-
-        {/* → */}
-        <div className="flex items-center justify-center w-[72px]">
-          <span className="text-[#4b443d] text-[24px] font-bold">→</span>
-        </div>
-
-        {/* STEP 2 */}
-        <div className="flex items-start gap-4 w-[360px]">
-          <div className="bg-[#8a8f98] text-white w-7 h-7 rounded-full flex items-center justify-center text-[13px] shrink-0">
-            2
-          </div>
-          <div>
-            <p className="text-[15px] font-medium text-[#3a332d] mb-1">
-              AI 자동완성
-            </p>
-            <p className="text-[13px] text-[#6b7280] leading-[18px]">
-              AI가 사진을 분석해<br />
-              하나의 장면을 완성합니다
-            </p>
-          </div>
-        </div>
-
-        {/* → */}
-        <div className="flex items-center justify-center w-[72px]">
-          <span className="text-[#4b443d] text-[24px] font-bold">→</span>
-        </div>
-
-        {/* STEP 3 */}
-        <div className="flex items-start gap-4 w-[360px]">
-          <div className="bg-[#b89a7c] text-white w-7 h-7 rounded-full flex items-center justify-center text-[13px] shrink-0">
-            3
-          </div>
-          <div>
-            <p className="text-[15px] font-medium text-[#3a332d] mb-1">
-              굿즈 완성
-            </p>
-            <p className="text-[13px] text-[#6b7280] leading-[18px]">
-              완성된 이미지를<br />
-              굿즈로 제작합니다
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
       {/* CTA 배너 */}
       <div className="bg-[#b89a7c]">
         <div className="text-center py-8">

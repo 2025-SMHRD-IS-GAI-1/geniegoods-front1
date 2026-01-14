@@ -172,7 +172,7 @@ export default function OrderDetailPage() {
           </h1>
           <button
             onClick={() => navigate("/orders")}
-            className="text-[14px] text-[#6a7282] hover:text-[#4a5565] transition-colors flex items-center gap-1"
+            className="text-[14px] text-[#6a7282] hover:text-[#4a5565] transition-colors flex items-center gap-1 cursor-pointer"
           >
             ← 주문 목록으로
           </button>
@@ -288,7 +288,7 @@ export default function OrderDetailPage() {
                     />
                     <button
                       onClick={handleAddressSearch}
-                      className="px-4 py-2 bg-[#b89a7c] text-white rounded-[8px] text-[14px] font-semibold hover:bg-[#a68a6c] transition-colors whitespace-nowrap"
+                      className="px-4 py-2 bg-[#b89a7c] text-white rounded-[8px] text-[14px] font-semibold hover:bg-[#a68a6c] transition-colors whitespace-nowrap cursor-pointer"
                     >
                       주소검색
                     </button>
@@ -320,7 +320,7 @@ export default function OrderDetailPage() {
                 </div>
                 <button
                   onClick={handleAddressChange}
-                  className="w-full px-4 py-2 bg-white border border-[#4a5565] text-[#6b6b6b] rounded-[8px] text-[14px] font-semibold hover:bg-gray-50 transition-colors"
+                  className="w-full px-4 py-2 bg-white border border-[#4a5565] text-[#6b6b6b] rounded-[8px] text-[14px] font-semibold hover:bg-gray-50 transition-colors cursor-pointer"
                 >
                   주소변경
                 </button>

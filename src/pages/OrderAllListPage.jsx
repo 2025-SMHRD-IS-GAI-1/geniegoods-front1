@@ -1,15 +1,23 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { selectAllOrders } from "../services/orderService";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { selectAllOrders, cancelOrder } from "../services/orderService";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import Toast from "../components/common/Toast";
 
 export default function OrderAllListPage() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [selectedStatus, setSelectedStatus] = useState("전체");
   const [selectedPeriod, setSelectedPeriod] = useState("최근 3개월");
   const [currentPage, setCurrentPage] = useState(0);
+
+  const [toastOption, setToastOption] = useState({
+    type: "",
+    show: false,
+    message: "",
+    duration: 2000,
+  });
 
   const statusOptions = ["전체", "주문완료", "배송중", "배송완료", "취소"];
   const periodOptions = [
@@ -100,11 +108,24 @@ export default function OrderAllListPage() {
   };
 
   const handleCancelOrder = (orderId) => {
-    if (window.confirm("주문을 취소하시겠습니까?")) {
-      console.log("주문 취소:", orderId);
-      // TODO: 주문 취소 API 호출
-    }
+    cancelOrderMutation.mutate(orderId);
   };
+  const cancelOrderMutation = useMutation({
+    mutationFn: async (orderId) => {
+      return await cancelOrder(orderId);
+    },
+    onSuccess: (data) => {
+      setToastOption({
+        type: "success",
+        show: true,
+        message: "주문 취소 성공",
+        duration: 2000,
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["selectAllOrders", selectedPeriod, currentPage],
+      });
+    },
+  });
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat("ko-KR").format(price);
@@ -112,17 +133,22 @@ export default function OrderAllListPage() {
 
   return (
     <div className="bg-[#f5f3f0] min-h-screen">
-      {isOrdersSuccess && (
-        <Toast
-          type="success"
-          message="주문 내역을 불러오는데 성공했습니다."
-          position="top-right"
-          duration={2000}
-        />
-      )}
+      {/* 로딩 스피너 */}
       {isOrdersLoading && (
         <LoadingSpinner message="주문 내역을 불러오는 중..." />
       )}
+
+      {/* 토스트 */}
+      {toastOption.show && (
+        <Toast
+          type={toastOption.type}
+          message={toastOption.message}
+          position="top-right"
+          duration={toastOption.duration}
+          onClose={() => setToastOption({ ...toastOption, show: false })}
+        />
+      )}
+
       <div className="max-w-[1200px] mx-auto px-8 py-8">
         {/* 페이지 제목 */}
         <div className="flex items-center justify-between mb-8">
@@ -131,7 +157,7 @@ export default function OrderAllListPage() {
           </h1>
           <button
             onClick={() => navigate("/mypage")}
-            className="border border-[#e6e6e6] bg-white text-[#7a7f87] px-3 py-1 text-[12px] rounded-[4px]  transition"
+            className="text-[#7a7f87] px-3 py-1 text-[12px] transition-colors cursor-pointer"
           >
             ← 마이페이지로 돌아가기
           </button>
@@ -146,7 +172,7 @@ export default function OrderAllListPage() {
                 <button
                   key={status}
                   onClick={() => setSelectedStatus(status)}
-                  className={`px-4 py-2 rounded-[8px] text-[14px] font-semibold transition-colors ${
+                  className={`px-4 py-2 rounded-[8px] text-[14px] font-semibold transition-colors cursor-pointer ${
                     selectedStatus === status
                       ? "bg-[#bb4d00] text-white"
                       : "bg-[#f3f4f6] text-[#6a7282] hover:bg-[#e5e7eb]"
@@ -276,16 +302,18 @@ export default function OrderAllListPage() {
                         <div className="flex gap-2">
                           <button
                             onClick={() => handleViewOrderDetail(order.orderId)}
-                            className="bg-[#b89a7c] text-white px-4 py-2 rounded-[10px] text-[14px] font-semibold hover:bg-[#a68a6c] transition-colors"
+                            className="bg-[#b89a7c] text-white px-4 py-2 rounded-[10px] text-[14px] font-semibold hover:bg-[#a68a6c] transition-colors cursor-pointer"
                           >
                             상세보기
                           </button>
-                          <button
-                            onClick={() => handleCancelOrder(order.orderId)}
-                            className="bg-white border border-[#4a5565] text-[#6b6b6b] px-4 py-2 rounded-[10px] text-[14px] font-semibold hover:bg-gray-50 transition-colors"
-                          >
-                            주문 취소
-                          </button>
+                          {order.status === "주문완료" && (
+                            <button
+                              onClick={() => handleCancelOrder(order.orderId)}
+                              className="bg-white border border-[#4a5565] text-[#6b6b6b] px-4 py-2 rounded-[10px] text-[14px] font-semibold hover:bg-gray-50 transition-colors cursor-pointer"
+                            >
+                              주문 취소
+                            </button>
+                          )}
                         </div>
                       </div>
                     </div>

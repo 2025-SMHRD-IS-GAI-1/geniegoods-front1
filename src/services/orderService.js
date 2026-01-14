@@ -150,3 +150,24 @@ export const updateOrderAddress = async (orderId, addressRequest) => {
     throw new Error("주문 주소를 수정하는데 실패했습니다.");
   }
 };
+
+/**
+ * 주문 취소
+ */
+export const cancelOrder = async (orderId) => {
+  try {
+    const response = await apiClient.post(`/api/order/cancel`, { orderId });
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const errorMessage =
+        (typeof error.response?.data === "string"
+          ? error.response.data
+          : null) ||
+        error.message ||
+        "주문 취소에 실패했습니다.";
+      throw new Error(errorMessage);
+    }
+    throw new Error("주문 취소에 실패했습니다.");
+  }
+};

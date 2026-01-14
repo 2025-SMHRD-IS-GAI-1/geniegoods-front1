@@ -1,8 +1,9 @@
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../stores/authStore";
 import { logout, getCurrentUser } from "../../services/authService";
 import defaultProfileIcon from "../../assets/img/defaultProfileIcon.png";
+import XMarkIcon from "@heroicons/react/24/outline/XMarkIcon";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -15,6 +16,8 @@ export default function Header() {
     setLoggingOut,
   } = useAuthStore();
   const hasProcessed = useRef(false);
+
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 
   // 사용자 정보 로드 (쿠키 기반 인증)
   useEffect(() => {
@@ -80,6 +83,15 @@ export default function Header() {
     }, 100);
   };
 
+  const handleProfileClick = () => {
+    setIsProfileMenuOpen(!isProfileMenuOpen);
+  };
+
+  const handleMyPage = () => {
+    navigate("/mypage");
+    setIsProfileMenuOpen(false);
+  };
+
   return (
     <header className="bg-white border-b border-[#e5e7eb] h-14 w-full relative z-50">
       <div className="h-full flex items-center justify-between px-4 md:px-8 max-w-[1440px] mx-auto">
@@ -97,7 +109,7 @@ export default function Header() {
           <div className="flex flex-row items-center gap-4">
             <button
               onClick={() => navigate("/create")}
-              className="h-[37px] px-4 rounded-[10px] hover:bg-gray-50 transition-colors"
+              className="h-[37px] px-4 rounded-[10px] hover:bg-gray-200 cursor-pointer transition-colors"
             >
               <span className="text-[14px] text-[#4a5565] whitespace-nowrap">
                 굿즈 만들기
@@ -106,7 +118,7 @@ export default function Header() {
 
             <button
               onClick={() => navigate("/browse")}
-              className="h-[37px] px-4 rounded-[10px] hover:bg-gray-50 transition-colors"
+              className="h-[37px] px-4 rounded-[10px] hover:bg-gray-200 cursor-pointer transition-colors"
             >
               <span className="text-[14px] text-[#4a5565] whitespace-nowrap">
                 굿즈 둘러보기
@@ -115,10 +127,19 @@ export default function Header() {
 
             <button
               onClick={() => navigate("/mygoods")}
-              className="h-[37px] px-4 rounded-[10px] hover:bg-gray-50 transition-colors"
+              className="h-[37px] px-4 rounded-[10px] hover:bg-gray-200 cursor-pointer transition-colors"
             >
               <span className="text-[14px] text-[#4a5565] whitespace-nowrap">
                 내가 생성한 굿즈
+              </span>
+            </button>
+
+            <button
+              onClick={() => navigate("/subscribe")}
+              className="h-[37px] px-4 rounded-[10px] hover:bg-gray-200 cursor-pointer transition-colors"
+            >
+              <span className="text-[14px] text-[#4a5565] whitespace-nowrap">
+                구독하기
               </span>
             </button>
           </div>
@@ -129,28 +150,66 @@ export default function Header() {
           <div className="hidden md:flex items-center gap-4">
             <div className="flex items-center gap-3">
               {/* 프로필 이미지 또는 이니셜 */}
-              {user?.profileUrl ? (
+              <div className="relative">
                 <img
-                  src={user.profileUrl}
-                  alt={user.nickname}
-                  className="rounded-full w-9 h-9 object-cover shadow-md"
-                  onClick={() => navigate("/mypage")}
+                  src={user.profileUrl ? user.profileUrl : defaultProfileIcon}
+                  alt={user.nickname || "default"}
+                  className="rounded-full w-9 h-9 object-cover shadow-md cursor-pointer"
+                  onClick={handleProfileClick}
                 />
-              ) : (
-                <img
-                  src={defaultProfileIcon}
-                  alt="default"
-                  className="w-9 h-9"
-                  onClick={() => navigate("/mypage")}
-                />
-              )}
+                {/* 프로필 메뉴 창 */}
+                {isProfileMenuOpen && (
+                  <div className="absolute top-12 left-1/2 -translate-x-1/2 w-56 bg-white border border-gray-200 rounded-xl shadow-lg z-50 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
+                    {/* 닫기 버튼 */}
+                    <button
+                      className="absolute top-3 right-3 w-6 h-6 flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-all duration-200 z-10 cursor-pointer"
+                      onClick={() => setIsProfileMenuOpen(false)}
+                    >
+                      <XMarkIcon className="w-4 h-4" />
+                    </button>
+
+                    {/* 프로필 헤더 섹션 */}
+                    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 pt-6 pb-4 px-4">
+                      <div className="flex flex-col items-center gap-3">
+                        <div className="relative">
+                          <img
+                            src={
+                              user.profileUrl
+                                ? user.profileUrl
+                                : defaultProfileIcon
+                            }
+                            alt={user.nickname || "default"}
+                            className="rounded-full w-16 h-16 object-cover shadow-lg ring-2 ring-white"
+                          />
+                        </div>
+                        <div className="text-center">
+                          <p className="text-[16px] font-semibold text-gray-800">
+                            {user?.nickname}님 안녕하세요!
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 메뉴 아이템 섹션 */}
+                    <div className="py-2 px-2">
+                      <button
+                        className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-lg text-[14px] text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-all duration-200 group cursor-pointer"
+                        onClick={handleMyPage}
+                      >
+                        <span className="font-medium">내 정보</span>
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+
               {/* 닉네임 */}
               <span className="text-[16px] text-black">{user?.nickname}님</span>
             </div>
 
             <button
               onClick={handleLogout}
-              className="bg-white border border-[#e2e8f0] h-[38.6px] px-4 rounded-[10px] hover:bg-gray-50 transition-colors"
+              className="bg-white border border-[#e2e8f0] h-[38.6px] px-4 rounded-[10px] hover:bg-gray-50 transition-colors cursor-pointer"
             >
               <span className="text-[14px] text-[#6b6560]">로그아웃</span>
             </button>
@@ -158,7 +217,7 @@ export default function Header() {
         ) : (
           <button
             onClick={() => navigate("/login")}
-            className="hidden md:block bg-white border border-[#e2e8f0] h-[38.6px] px-4 rounded-[10px] hover:bg-gray-50 transition-colors"
+            className="hidden md:block bg-white border border-[#e2e8f0] h-[38.6px] px-4 rounded-[10px] hover:bg-gray-50 transition-colors cursor-pointer"
           >
             <span className="text-[14px] text-[#6b6560]">로그인</span>
           </button>

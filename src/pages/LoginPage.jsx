@@ -26,7 +26,7 @@ export default function LoginPage() {
           {/* 카카오 로그인 */}
           <button
             onClick={() => handleSocialLogin("kakao")}
-            className="bg-[#fee500] h-[52px] rounded-[10px] shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
+            className="bg-[#fee500] h-[52px] rounded-[10px] shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] flex items-center justify-center gap-2 hover:opacity-90 transition-opacity cursor-pointer"
           >
             <img src={kakaoIcon} alt="카카오" className="w-5 h-5" />
             <span className="text-[16px] text-black font-normal">
@@ -37,7 +37,7 @@ export default function LoginPage() {
           {/* 네이버 로그인 */}
           <button
             onClick={() => handleSocialLogin("naver")}
-            className="bg-[#03c75a] h-[52px] rounded-[10px] shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
+            className="bg-[#03c75a] h-[52px] rounded-[10px] shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] flex items-center justify-center gap-2 hover:opacity-90 transition-opacity cursor-pointer"
           >
             <img src={naverIcon} alt="네이버" className="w-5 h-5" />
             <span className="text-[16px] text-white font-normal">
@@ -48,7 +48,7 @@ export default function LoginPage() {
           {/* 구글 로그인 */}
           <button
             onClick={() => handleSocialLogin("google")}
-            className="bg-white border border-[#d1d5dc] h-[52px] rounded-[10px] shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] flex items-center justify-center gap-2 hover:bg-gray-50 transition-colors"
+            className="bg-white border border-[#d1d5dc] h-[52px] rounded-[10px] shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] flex items-center justify-center gap-2 hover:bg-gray-50 transition-colors cursor-pointer"
           >
             <img src={googleIcon} alt="구글" className="w-5 h-5" />
             <span className="text-[16px] text-[#364153] font-normal">

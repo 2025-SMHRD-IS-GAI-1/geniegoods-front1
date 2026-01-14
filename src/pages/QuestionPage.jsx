@@ -79,7 +79,7 @@ export default function QuestionPage() {
                     {/* 질문 버튼 */}
                     <button
                       onClick={() => toggleQuestion(faq.id)}
-                      className={`w-full flex items-center justify-between px-5 py-4 text-left transition-colors ${
+                      className={`w-full flex items-center justify-between px-5 py-4 text-left transition-colors cursor-pointer ${
                         isOpen
                           ? "bg-[#f9fafb]"
                           : "bg-[#f9fafb] hover:bg-gray-50"
@@ -90,15 +90,11 @@ export default function QuestionPage() {
                       </span>
                       <div className="flex-shrink-0 ml-4">
                         {/* 화살표 */}
-                        {isOpen ? (
-                          <ChevronUpIcon
-                            className={`w-5 h-5 transition-transfrom`}
-                          />
-                        ) : (
-                          <ChevronDownIcon
-                            className={`w-5 h-5 transition-transform`}
-                          />
-                        )}
+                        <ChevronDownIcon
+                          className={`w-5 h-5 transition-transform ${
+                            isOpen ? "rotate-180" : ""
+                          }`}
+                        />
                       </div>
                     </button>
 
@@ -121,7 +117,7 @@ export default function QuestionPage() {
         <div className="flex justify-center mt-8">
           <button
             onClick={handleBackToMain}
-            className="bg-white border border-[#e5e7eb] px-6 py-3 rounded-[10px] text-[16px] text-[#364153] hover:bg-gray-50 transition-colors flex items-center gap-2"
+            className="bg-white border border-[#e5e7eb] px-6 py-3 rounded-[10px] text-[16px] text-[#364153] hover:bg-gray-50 transition-colors flex items-center gap-2 cursor-pointer"
           >
             <span>←</span>
             <span>메인으로 돌아가기</span>
