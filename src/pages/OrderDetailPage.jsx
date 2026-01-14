@@ -40,6 +40,7 @@ export default function OrderDetailPage() {
       const response = await selectOrderDetail(orderId);
       return response;
     },
+    refetchOnMount: "always",
   });
 
   useEffect(() => {
@@ -89,23 +90,6 @@ export default function OrderDetailPage() {
         return "bg-red-100 text-red-700";
       default:
         return "bg-gray-100 text-gray-700";
-    }
-  };
-
-  const getStatusText = (status) => {
-    switch (status) {
-      case "PENDING":
-        return "주문완료";
-      case "PAID":
-        return "결제완료";
-      case "SHIPPING":
-        return "배송중";
-      case "DELIVERED":
-        return "배송완료";
-      case "CANCELLED":
-        return "취소";
-      default:
-        return status;
     }
   };
 

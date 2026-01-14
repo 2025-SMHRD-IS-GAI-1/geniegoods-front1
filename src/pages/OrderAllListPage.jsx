@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { selectAllOrders } from "../services/orderService";
 import LoadingSpinner from "../components/common/LoadingSpinner";
+import Toast from "../components/common/Toast";
 
 export default function OrderAllListPage() {
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ export default function OrderAllListPage() {
   const {
     data: ordersData,
     isLoading: isOrdersLoading,
+    isSuccess: isOrdersSuccess,
     error: ordersError,
   } = useQuery({
     queryKey: ["selectAllOrders", selectedPeriod, currentPage],
@@ -55,7 +57,7 @@ export default function OrderAllListPage() {
   };
 
   // 주문 목록과 필터링
-  const orders = ordersData?.content || [];
+  const orders = ordersData?.contents || [];
   const filteredOrders =
     selectedStatus === "전체"
       ? orders
@@ -110,21 +112,30 @@ export default function OrderAllListPage() {
 
   return (
     <div className="bg-[#f5f3f0] min-h-screen">
+      {isOrdersSuccess && (
+        <Toast
+          type="success"
+          message="주문 내역을 불러오는데 성공했습니다."
+          position="top-right"
+          duration={2000}
+        />
+      )}
+      {isOrdersLoading && (
+        <LoadingSpinner message="주문 내역을 불러오는 중..." />
+      )}
       <div className="max-w-[1200px] mx-auto px-8 py-8">
-      {/* 페이지 제목 */}
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="text-[28px] font-semibold text-[#2d2520]">
-          전체 주문 내역
-        </h1>
-        <button
-          onClick={() => navigate("/mypage")}
-          className="border border-[#e6e6e6] bg-white text-[#7a7f87] px-3 py-1 text-[12px] rounded-[4px]  transition"
-        >
-          ← 마이페이지로 돌아가기
-        </button>
-
-      </div>
-
+        {/* 페이지 제목 */}
+        <div className="flex items-center justify-between mb-8">
+          <h1 className="text-[28px] font-semibold text-[#2d2520]">
+            전체 주문 내역
+          </h1>
+          <button
+            onClick={() => navigate("/mypage")}
+            className="border border-[#e6e6e6] bg-white text-[#7a7f87] px-3 py-1 text-[12px] rounded-[4px]  transition"
+          >
+            ← 마이페이지로 돌아가기
+          </button>
+        </div>
 
         {/* 필터 섹션 */}
         <div className="bg-white rounded-[16px] shadow-[0px_2px_8px_0px_rgba(0,0,0,0.1)] p-6 mb-6">
@@ -168,11 +179,7 @@ export default function OrderAllListPage() {
 
         {/* 주문 목록 */}
         <div className="bg-white rounded-[16px] shadow-[0px_2px_8px_0px_rgba(0,0,0,0.1)] p-8">
-          {isOrdersLoading ? (
-            <div className="text-center py-16">
-              <LoadingSpinner message="주문 내역을 불러오는 중..." />
-            </div>
-          ) : ordersError ? (
+          {ordersError ? (
             <div className="text-center py-16">
               <p className="text-[16px] text-red-600 mb-2">
                 주문 내역을 불러오는데 실패했습니다.
