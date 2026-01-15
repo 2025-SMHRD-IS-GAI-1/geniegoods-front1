@@ -7,37 +7,18 @@ import XMarkIcon from "@heroicons/react/24/outline/XMarkIcon";
 
 export default function Header() {
   const navigate = useNavigate();
-  const {
-    isAuthenticated,
-    user,
-    setUser,
-    clearAuth,
-    isLoggingOut,
-    setLoggingOut,
-  } = useAuthStore();
+  const { user, setUser, clearAuth } = useAuthStore();
   const hasProcessed = useRef(false);
 
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 
   // 사용자 정보 로드 (쿠키 기반 인증)
   useEffect(() => {
-    // 로그아웃 중이면 사용자 정보를 확인하지 않음
-    if (isLoggingOut) {
-      return;
-    }
-
+    console.log("user", user);
     // user가 이미 있으면 인증 확인 완료
-    if (user) {
-      hasProcessed.current = true;
-      return;
-    }
+    if (user || hasProcessed.current) return;
 
-    // 이미 처리했으면 중복 실행 방지
-    if (hasProcessed.current) {
-      return;
-    }
-
-    // 처리 시작 표시
+    // 처리 시간 표시
     hasProcessed.current = true;
 
     // 쿠키에 토큰이 있는지 확인하기 위해 사용자 정보 조회
@@ -51,24 +32,17 @@ export default function Header() {
         hasProcessed.current = true;
       })
       .catch((error) => {
-        // 사용자 정보 로드 실패 시 명시적으로 인증 상태 초기화
-        // 401 에러는 정상적인 로그아웃 상태이므로 로그를 남기지 않음
-        const status = error?.response?.status || error?.status;
-        if (status !== 401) {
-          console.error("사용자 정보 로드 실패:", error);
-        }
         // 인증 상태 확실히 초기화
         clearAuth();
         // 로그아웃 상태로 간주하여 다시 호출하지 않도록
         hasProcessed.current = true;
       });
-  }, [user, setUser, clearAuth, isLoggingOut]);
+  }, [user, setUser, clearAuth]);
 
   const handleLogout = async () => {
-    // 로그아웃 시작 플래그 설정 (즉시 UI 업데이트)
-    setLoggingOut(true);
     // 상태 초기화
     clearAuth();
+    hasProcessed.current = false;
 
     try {
       // 로그아웃 API 호출 (쿠키 삭제)
@@ -77,19 +51,53 @@ export default function Header() {
       console.error("로그아웃 처리 중 오류:", error);
     }
 
-    // 약간의 지연 후 페이지 새로고침 (상태 업데이트가 완료되도록)
-    setTimeout(() => {
-      window.location.replace("/login");
-    }, 100);
+    navigate("/login");
+  };
+
+  const handleGoCreatePage = () => {
+    if (!user) {
+      alert("로그인 후 이용해주세요.");
+      navigate("/login");
+      return;
+    }
+    navigate("/create");
   };
 
   const handleProfileClick = () => {
+    if (!user) {
+      alert("로그인 후 이용해주세요.");
+      navigate("/login");
+      return;
+    }
     setIsProfileMenuOpen(!isProfileMenuOpen);
   };
 
+  const handleGoMyGoodsPage = () => {
+    if (!user) {
+      alert("로그인 후 이용해주세요.");
+      navigate("/login");
+      return;
+    }
+    navigate("/mygoods");
+  };
+
+  const handleGoSubscribePage = () => {
+    if (!user) {
+      alert("로그인 후 이용해주세요.");
+      navigate("/login");
+      return;
+    }
+    navigate("/subscribe");
+  };
+
   const handleMyPage = () => {
-    navigate("/mypage");
+    if (!user) {
+      alert("로그인 후 이용해주세요.");
+      navigate("/login");
+      return;
+    }
     setIsProfileMenuOpen(false);
+    navigate("/mypage");
   };
 
   return (
@@ -108,7 +116,7 @@ export default function Header() {
           {/* 네비게이션 메뉴 (태블릿 이상 가로 유지) */}
           <div className="flex flex-row items-center gap-4">
             <button
-              onClick={() => navigate("/create")}
+              onClick={handleGoCreatePage}
               className="h-[37px] px-4 rounded-[10px] hover:bg-gray-200 cursor-pointer transition-colors"
             >
               <span className="text-[14px] text-[#4a5565] whitespace-nowrap">
@@ -126,7 +134,7 @@ export default function Header() {
             </button>
 
             <button
-              onClick={() => navigate("/mygoods")}
+              onClick={handleGoMyGoodsPage}
               className="h-[37px] px-4 rounded-[10px] hover:bg-gray-200 cursor-pointer transition-colors"
             >
               <span className="text-[14px] text-[#4a5565] whitespace-nowrap">
@@ -135,7 +143,7 @@ export default function Header() {
             </button>
 
             <button
-              onClick={() => navigate("/subscribe")}
+              onClick={handleGoSubscribePage}
               className="h-[37px] px-4 rounded-[10px] hover:bg-gray-200 cursor-pointer transition-colors"
             >
               <span className="text-[14px] text-[#4a5565] whitespace-nowrap">
@@ -146,7 +154,7 @@ export default function Header() {
         </div>
 
         {/* 오른쪽: 사용자 정보 */}
-        {!isLoggingOut && user && user.nickname ? (
+        {user ? (
           <div className="hidden md:flex items-center gap-4">
             <div className="flex items-center gap-3">
               {/* 프로필 이미지 또는 이니셜 */}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import { useAuthStore } from "../stores/authStore";
 import {
   useInfiniteQuery,
   useMutation,
@@ -21,6 +22,7 @@ const PAGE_SIZE = 8;
 
 export default function BrowsePage() {
   const navigate = useNavigate();
+  const { user } = useAuthStore();
   const queryClient = useQueryClient();
   const [selectedCategory, setSelectedCategory] = useState(0);
   const [selectedGoods, setSelectedGoods] = useState(null);
@@ -83,6 +85,11 @@ export default function BrowsePage() {
   };
 
   const handleCustomizeGoods = () => {
+    if (!user) {
+      alert("로그인 후 이용해주세요.");
+      navigate("/login");
+      return;
+    }
     navigate("/create", { state: { goodsDetail: selectedGoods } });
     handleCloseModal();
   };
@@ -182,7 +189,7 @@ export default function BrowsePage() {
               {/* 닫기 버튼 */}
               <button
                 onClick={handleCloseModal}
-                className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-700 transition-colors z-10 bg-white rounded-full"
+                className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-gray-500 hover:text-gray-700 transition-colors z-10 bg-white rounded-full cursor-pointer"
               >
                 <XMarkIcon className="w-6 h-6" />
               </button>
@@ -232,20 +239,27 @@ export default function BrowsePage() {
                 </div>
 
                 {/* 옵션 정보 */}
+
                 <div className="mb-4">
                   <h3 className="text-[16px] font-semibold text-[#0a0a0a] mb-2">
                     옵션
                   </h3>
                   <div className="flex gap-2 flex-wrap">
-                    <span className="px-3 py-1 bg-[#f5f3f0] rounded-[6px] text-[14px] text-[#364153]">
-                      {selectedGoods.goodsStyle}
-                    </span>
-                    <span className="px-3 py-1 bg-[#f5f3f0] rounded-[6px] text-[14px] text-[#364153]">
-                      {selectedGoods.goodsTone}
-                    </span>
-                    <span className="px-3 py-1 bg-[#f5f3f0] rounded-[6px] text-[14px] text-[#364153]">
-                      {selectedGoods.goodsMood}
-                    </span>
+                    {selectedGoods.goodsStyle && (
+                      <span className="px-3 py-1 bg-[#f5f3f0] rounded-[6px] text-[14px] text-[#364153]">
+                        {selectedGoods.goodsStyle}
+                      </span>
+                    )}
+                    {selectedGoods.goodsTone && (
+                      <span className="px-3 py-1 bg-[#f5f3f0] rounded-[6px] text-[14px] text-[#364153]">
+                        {selectedGoods.goodsTone}
+                      </span>
+                    )}
+                    {selectedGoods.goodsMood && (
+                      <span className="px-3 py-1 bg-[#f5f3f0] rounded-[6px] text-[14px] text-[#364153]">
+                        {selectedGoods.goodsMood}
+                      </span>
+                    )}
                   </div>
                 </div>
 
@@ -262,7 +276,7 @@ export default function BrowsePage() {
                 {/* 굿즈 커스텀하기 버튼 */}
                 <button
                   onClick={handleCustomizeGoods}
-                  className="w-full bg-[#b89a7c] text-white py-3 rounded-[10px] text-[14px] font-semibold hover:bg-[#a68a6c] transition-colors"
+                  className="w-full bg-[#b89a7c] text-white py-3 rounded-[10px] text-[14px] font-semibold hover:bg-[#a68a6c] transition-colors cursor-pointer"
                 >
                   굿즈 커스텀하기
                 </button>

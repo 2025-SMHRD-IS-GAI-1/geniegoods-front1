@@ -8,7 +8,6 @@ export const useAuthStore = create((set) => ({
   // 초기 상태 설정
   isAuthenticated: false, // API 호출로 확인
   user: null, // 사용자 정보
-  isLoggingOut: false, // 로그아웃 중 플래그
 
   // 인증 상태 설정 함수
   setAuthenticated: (isAuthenticated) => {
@@ -17,7 +16,7 @@ export const useAuthStore = create((set) => ({
 
   // 사용자 정보 설정 함수
   setUser: (user) => {
-    set({ 
+    set({
       user,
       isAuthenticated: !!user, // 사용자 정보가 있으면 인증된 것으로 간주
       isLoggingOut: false, // 로그인 성공 시 로그아웃 플래그 해제
@@ -29,12 +28,6 @@ export const useAuthStore = create((set) => ({
     set({
       isAuthenticated: false,
       user: null,
-      isLoggingOut: false, // 로그아웃 완료
     });
-  },
-
-  // 로그아웃 시작 함수
-  setLoggingOut: (isLoggingOut) => {
-    set({ isLoggingOut });
   },
 }));
