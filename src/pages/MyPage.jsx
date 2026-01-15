@@ -323,6 +323,11 @@ export default function MyPage() {
 
   // 주문 상세보기
   const handleViewOrderDetail = (orderId) => {
+    if (!user) {
+      alert("로그인 후 이용해주세요.");
+      navigate("/login");
+      return;
+    }
     navigate(`/orders/${orderId}`);
   };
 
@@ -336,6 +341,11 @@ export default function MyPage() {
 
   // 전체 주문 보기
   const handleViewAllOrders = () => {
+    if (!user) {
+      alert("로그인 후 이용해주세요.");
+      navigate("/login");
+      return;
+    }
     navigate("/orders");
   };
 
@@ -346,6 +356,11 @@ export default function MyPage() {
 
   // 회원탈퇴 모달 열기
   const handleWithdraw = () => {
+    if (!user) {
+      alert("로그인 후 이용해주세요.");
+      navigate("/login");
+      return;
+    }
     setIsWithdrawModalOpen(true);
   };
 
