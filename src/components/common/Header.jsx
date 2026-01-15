@@ -14,7 +14,6 @@ export default function Header() {
 
   // 사용자 정보 로드 (쿠키 기반 인증)
   useEffect(() => {
-    console.log("user", user);
     // user가 이미 있으면 인증 확인 완료
     if (user || hasProcessed.current) return;
 
