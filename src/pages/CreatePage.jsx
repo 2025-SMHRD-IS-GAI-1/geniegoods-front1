@@ -200,19 +200,19 @@ export default function CreatePage() {
   const handleDescription = (option) => {
     const { category, style, color, mood } = option;
 
-    let descript = "사진속 객체를";
+    let descript = "";
 
     if (style) {
-      descript += " 화풍은 " + style;
+      descript += " 화풍 " + style;
     }
     if (color) {
-      descript += " 색감은 " + color;
+      descript += " 색감 " + color;
     }
     if (mood) {
-      descript += " 분위기는 " + mood + " 하게";
+      descript += " 분위기 " + mood;
     }
     if (category) {
-      descript += " " + category + "로 만들어줘";
+      descript += " " + category + " 적용 시안";
     }
     setDescription(descript);
   };
