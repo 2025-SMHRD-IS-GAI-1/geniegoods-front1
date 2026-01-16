@@ -83,7 +83,11 @@ export default function SubscribePage() {
       return response;
     },
     onSuccess: (data) => {
-      setUser({ ...user, subscriptionPlan: data.subscriptionPlan });
+      setUser({
+        ...user,
+        subscriptionPlan: data.subscriptionPlan,
+        subscriptionExpiryDate: data.subscriptionExpiryDate,
+      });
       navigate("/mypage");
     },
   });

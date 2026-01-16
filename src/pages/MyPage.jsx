@@ -543,9 +543,7 @@ export default function MyPage() {
                 </div>
                 {user?.subscriptionPlan === "PRO" &&
                   user?.subscriptionExpiryDate && (
-                    <span>
-                      기간 : {user.subscriptionExpiryDate.replace("T", " ")}
-                    </span>
+                    <span>기간 : {user.subscriptionExpiryDate} 까지</span>
                   )}
               </div>
             </div>
