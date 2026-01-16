@@ -439,7 +439,10 @@ export default function MyGoodsPage() {
                   </div>
 
                   {/* 이미지 */}
-                  <div className="bg-[#f5f0eb] aspect-[3/4] mb-1  flex items-center justify-center overflow-hidden rounded-t-[16px]">
+                  <div
+                    onClick={() => handleToggleCheck(item.id)}
+                    className="bg-[#f5f0eb] aspect-[3/4] mb-1  flex items-center justify-center overflow-hidden rounded-t-[16px] cursor-pointer"
+                  >
                     <img
                       src={item.image}
                       alt={`굿즈 ${item.id}`}
