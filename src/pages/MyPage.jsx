@@ -503,8 +503,8 @@ export default function MyPage() {
             </h2>
 
             {/* 프로필 이미지 */}
-            <div className="flex justify-center mb-8">
-              <div className="relative">
+            <div className="flex flex-col items-center mb-8">
+              <div className="relative mb-4">
                 <div className="rounded-full w-28 h-28 flex items-center justify-center overflow-hidden">
                   <img
                     src={profileImage}
@@ -515,7 +515,7 @@ export default function MyPage() {
                 <button
                   onClick={handleChangeProfileImage}
                   disabled={isUploading}
-                  className="absolute bottom-0 right-0 bg-white border border-[#e5e7eb] rounded-full w-8 h-8 flex items-center justify-center hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="absolute bottom-0 right-0 bg-white border border-[#e5e7eb] rounded-full w-8 h-8 flex items-center justify-center hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                 >
                   <CameraIcon className="w-4 h-4" />
                 </button>
@@ -526,6 +526,27 @@ export default function MyPage() {
                   onChange={handleFileChange}
                   className="hidden"
                 />
+              </div>
+
+              {/* 멤버십 배지 */}
+              <div className="flex flex-col items-center gap-2">
+                <div
+                  className={`px-4 py-2 rounded-full text-[14px] font-semibold ${
+                    user?.subscriptionPlan === "PRO"
+                      ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md"
+                      : "bg-gray-100 text-gray-700"
+                  }`}
+                >
+                  {user?.subscriptionPlan === "PRO"
+                    ? "⭐ PRO 멤버십"
+                    : "🆓 FREE 멤버십"}
+                </div>
+                {user?.subscriptionPlan === "PRO" &&
+                  user?.subscriptionExpiryDate && (
+                    <span>
+                      기간 : {user.subscriptionExpiryDate.replace("T", " ")}
+                    </span>
+                  )}
               </div>
             </div>
 

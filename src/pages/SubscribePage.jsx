@@ -162,17 +162,19 @@ export default function SubscribePage() {
                 </ul>
 
                 {/* 구독 버튼 */}
-                <button
-                  onClick={() => handleSubscribe(plan.id)}
-                  disabled={plan.isPopular}
-                  className={`w-full py-3 px-6 rounded-xl font-semibold text-[14px] transition-all duration-200 cursor-pointer ${
-                    plan.isPopular
-                      ? "disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-200 disabled:text-gray-500 disabled:border-gray-300"
-                      : "bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-50"
-                  }`}
-                >
-                  {plan.buttonText}
-                </button>
+                {plan.id === "PRO" && (
+                  <button
+                    onClick={() => handleSubscribe(plan.id)}
+                    disabled={plan.isPopular}
+                    className={`w-full py-3 px-6 rounded-xl font-semibold text-[14px] transition-all duration-200 cursor-pointer ${
+                      plan.isPopular
+                        ? "disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-200 disabled:text-gray-500 disabled:border-gray-300"
+                        : "bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-50"
+                    }`}
+                  >
+                    {plan.buttonText}
+                  </button>
+                )}
               </div>
             </div>
           ))}

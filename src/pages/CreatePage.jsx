@@ -203,7 +203,7 @@ export default function CreatePage() {
     let descript = "";
 
     if (style) {
-      descript += " 화풍 " + style;
+      descript += "화풍 " + style;
     }
     if (color) {
       descript += " 색감 " + color;

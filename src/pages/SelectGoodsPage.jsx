@@ -6,6 +6,7 @@ import { deleteSampleImg } from "../services/goodsService";
 
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import Toast from "../components/common/Toast";
+import { ArrowDownTrayIcon } from "@heroicons/react/24/outline";
 
 export default function SelectGoodsPage() {
   const navigate = useNavigate();
@@ -389,42 +390,21 @@ export default function SelectGoodsPage() {
         <div className="flex items-center justify-center gap-4 mt-8">
           <button
             onClick={handleBack}
-            className="bg-white border border-[#e5e7eb] h-[48px] px-8 rounded-[10px] text-[18px] text-[#364153] hover:bg-gray-50 transition-colors"
+            className="bg-white border border-[#e5e7eb] h-[48px] px-8 rounded-[10px] text-[18px] text-[#364153] hover:bg-gray-50 transition-colors cursor-pointer"
           >
             뒤로
           </button>
           <button
             onClick={handleSelectGoods}
-            className="bg-[#b89a7c] h-[48px] px-8 rounded-[10px] text-[18px] text-white hover:bg-[#a68a6c] transition-colors shadow-md"
+            className="bg-[#b89a7c] h-[48px] px-8 rounded-[10px] text-[18px] text-white hover:bg-[#a68a6c] transition-colors shadow-md cursor-pointer"
           >
             굿즈 선택
           </button>
           <button
             onClick={handleDownload}
-            className="bg-white border border-[#e5e7eb] h-[48px] px-8 rounded-[10px] text-[18px] text-[#364153] hover:bg-gray-50 transition-colors flex items-center gap-2"
+            className="bg-white border border-[#e5e7eb] h-[48px] px-8 rounded-[10px] text-[18px] text-[#364153] hover:bg-gray-50 transition-colors flex items-center gap-2 cursor-pointer"
           >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              className="text-[#364153]"
-            >
-              <path
-                d="M8 12V4M8 4L4 8M8 4L12 8"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M2 12V14C2 14.5304 2.21071 15.0391 2.58579 15.4142C2.96086 15.7893 3.46957 16 4 16H12C12.5304 16 13.0391 15.7893 13.4142 15.4142C13.7893 15.0391 14 14.5304 14 14V12"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <ArrowDownTrayIcon className="w-4 h-4 text-[#364153]" />
             다운로드
           </button>
         </div>
