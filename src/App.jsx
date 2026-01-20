@@ -1,11 +1,11 @@
 import { useEffect, useRef } from "react";
-import { useAuthStore, clearAuth } from "./stores/authStore";
+import { useAuthStore } from "./stores/authStore";
 import { getCurrentUser } from "./services/authService";
 
 import Router from "./Router";
 
 export default function App() {
-  const { user, setUser } = useAuthStore();
+  const { user, setUser, clearAuth } = useAuthStore();
   const hasProcessed = useRef(false);
 
   useEffect(() => {
