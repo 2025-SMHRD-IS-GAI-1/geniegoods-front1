@@ -99,6 +99,9 @@ export default function Header() {
     navigate("/mypage");
   };
 
+  console.log("user: " + user);
+  console.log("nickname: " + user?.nickname);
+
   return (
     <header className="bg-white border-b border-[#e5e7eb] h-14 w-full relative z-50">
       <div className="h-full flex items-center justify-between px-4 md:px-8 max-w-[1440px] mx-auto">
