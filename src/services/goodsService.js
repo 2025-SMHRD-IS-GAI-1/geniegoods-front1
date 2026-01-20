@@ -35,9 +35,13 @@ apiClient.interceptors.response.use(
  * @param
  * @returns
  */
-export const createGoodsImage = async (goodsOptionData) => {
-  try {
-    const response = await apiClient.post("/api/goods/create", goodsOptionData);
+export const createGoodsImage = async (formData) => {
+  try { 
+    const response = await apiClient.post("/api/goods/create-image", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -54,8 +58,37 @@ export const createGoodsImage = async (goodsOptionData) => {
   }
 };
 
+
 /**
- * 시안 삭제 호출
+ * 시안 생성
+ * @param {} formData 
+ * @returns 
+ */
+export const createGoodsSample = async (formData) => {
+  try {
+    const response = await apiClient.post("/api/goods/create-goods-sample", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const errorMessage =
+        (typeof error.response?.data === "string"
+          ? error.response.data
+          : null) ||
+        error.message ||
+        "시안 생성에 실패했습니다.";
+      throw new Error(errorMessage);
+    }
+    throw new Error("시안 생성에 실패했습니다.");
+  }
+};
+
+
+/**
+ * 시안 삭제
  * @param
  * @returns
  */
@@ -77,6 +110,24 @@ export const deleteSampleImg = async (requestBody) => {
       throw new Error(errorMessage);
     }
     throw new Error("시안 삭제에 실패했습니다.");
+  }
+};
+
+export const selectGoods = async (requestBody) => {
+  try {
+    const response = await apiClient.post("/api/goods/select-goods", requestBody);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const errorMessage =
+        (typeof error.response?.data === "string"
+          ? error.response.data
+          : null) ||
+          error.message ||
+          "굿즈 선택에 실패했습니다.";
+      throw new Error(errorMessage);
+    }
+    throw new Error("굿즈 선택에 실패했습니다.");
   }
 };
 

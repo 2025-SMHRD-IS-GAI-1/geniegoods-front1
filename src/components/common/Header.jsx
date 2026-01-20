@@ -12,32 +12,6 @@ export default function Header() {
 
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 
-  // 사용자 정보 로드 (쿠키 기반 인증)
-  useEffect(() => {
-    // user가 이미 있으면 인증 확인 완료
-    if (user || hasProcessed.current) return;
-
-    // 처리 시간 표시
-    hasProcessed.current = true;
-
-    // 쿠키에 토큰이 있는지 확인하기 위해 사용자 정보 조회
-    // 성공하면 인증된 것으로 간주
-    getCurrentUser()
-      .then((userData) => {
-        // 사용자 정보가 있으면 설정
-        if (userData) {
-          setUser(userData);
-        }
-        hasProcessed.current = true;
-      })
-      .catch((error) => {
-        // 인증 상태 확실히 초기화
-        clearAuth();
-        // 로그아웃 상태로 간주하여 다시 호출하지 않도록
-        hasProcessed.current = true;
-      });
-  }, [user, setUser, clearAuth]);
-
   const handleLogout = async () => {
     // 상태 초기화
     clearAuth();

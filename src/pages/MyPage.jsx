@@ -159,6 +159,7 @@ export default function MyPage() {
       return response;
     },
     onSuccess: (data) => {
+      console.log("닉네임 변경 성공:", data);
       if (data.status === "SUCCESS") {
         setNickname(nickname);
         setUser({ ...user, nickname: nickname });
@@ -248,7 +249,6 @@ export default function MyPage() {
       return response;
     },
     onSuccess: (data) => {
-      if (data.status === "SUCCESS") {
         setProfileImage(data.profileUrl);
         setUser({ ...user, profileUrl: data.profileUrl });
         setToastOption({
@@ -257,14 +257,6 @@ export default function MyPage() {
           show: true,
           duration: 2000,
         });
-      } else {
-        setToastOption({
-          type: "error",
-          message: data.message || "프로필 이미지 업로드에 실패했습니다.",
-          show: true,
-          duration: 2000,
-        });
-      }
     },
     onError: (error) => {
       console.error("프로필 이미지 업로드 실패:", error);
@@ -392,6 +384,12 @@ export default function MyPage() {
     },
     onError: (error) => {
       console.error("회원탈퇴 실패:", error);
+      setToastOption({
+        type: "error",
+        message: error.message || "회원탈퇴에 실패했습니다.",
+        show: true,
+        duration: 2000,
+      });
     },
   });
 

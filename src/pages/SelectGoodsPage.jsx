@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { apiClient } from "../services/authService";
-import { deleteSampleImg } from "../services/goodsService";
+import { createGoodsSample, deleteSampleImg, selectGoods } from "../services/goodsService";
 
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import Toast from "../components/common/Toast";
@@ -28,19 +28,11 @@ export default function SelectGoodsPage() {
   // 시안 생성 mutation
   const createGoodsSampleMutation = useMutation({
     mutationFn: async (formData) => {
-      const response = await apiClient.post(
-        "/api/goods/create-goods-sample",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      return response.data;
+      const response = await createGoodsSample(formData);
+      return response;
     },
     onSuccess: (data) => {
-      if (data.status === "SUCCESS" && data.goodsSampleImgUrls) {
+      if (data.goodsSampleImgUrls) {
         // API 응답으로 받은 시안 이미지 사용
         const samples = data.goodsSampleImgUrls.map((url, index) => ({
           id: index + 1,
@@ -55,13 +47,6 @@ export default function SelectGoodsPage() {
           type: "success",
           show: true,
           message: "시안 생성 완료!",
-          duration: 2000,
-        });
-      } else {
-        setToastOption({
-          type: "error",
-          show: true,
-          message: "시안 생성에 실패했습니다.",
           duration: 2000,
         });
       }
@@ -123,21 +108,12 @@ export default function SelectGoodsPage() {
       return await deleteSampleImg(requestBody);
     },
     onSuccess: (data) => {
-      if (data.status === "SUCCESS") {
-        // 삭제 성공 후 CreatePage로 이동
-        navigate("/create", {
-          state: {
-            selectGoodsPageState: createPageState,
-          },
-        });
-      } else {
-        setToastOption({
-          type: "error",
-          show: true,
-          message: data.message || "시안 삭제에 실패했습니다.",
-          duration: 2000,
-        });
-      }
+      // 삭제 성공 후 CreatePage로 이동
+      navigate("/create", {
+        state: {
+          selectGoodsPageState: createPageState,
+        },
+      });
     },
     onError: (error) => {
       console.error("시안 삭제 실패:", error);
@@ -199,14 +175,10 @@ export default function SelectGoodsPage() {
   // 굿즈 선택 mutation
   const selectGoodsMutation = useMutation({
     mutationFn: async (requestBody) => {
-      const response = await apiClient.post(
-        "/api/goods/select-goods",
-        requestBody
-      );
-      return response.data;
+      const response = await selectGoods(requestBody);
+      return response;
     },
     onSuccess: (data) => {
-      if (data.status === "SUCCESS") {
         navigate("/mygoods", {
           state: {
             toastOption: {
@@ -217,14 +189,6 @@ export default function SelectGoodsPage() {
             },
           },
         });
-      } else {
-        setToastOption({
-          type: "error",
-          show: true,
-          message: "굿즈 선택에 실패했습니다.",
-          duration: 2000,
-        });
-      }
     },
     onError: (error) => {
       console.error("굿즈 선택 실패:", error);

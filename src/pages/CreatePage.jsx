@@ -9,7 +9,7 @@ import Toast from "../components/common/Toast";
 import IllustrationSample from "../assets/img/illustrationSample.png";
 import PaintingSample from "../assets/img/paintingSample.png";
 import RealisticSample from "../assets/img/realisticSample.png";
-
+import { createGoodsImage } from "../services/goodsService";
 export default function CreatePage() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -247,35 +247,18 @@ export default function CreatePage() {
   // 굿즈 이미지 생성 mutation
   const goodsImageCreateMutation = useMutation({
     mutationFn: async (formData) => {
-      const response = await apiClient.post(
-        "/api/goods/create-image",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      return response.data;
+      const response = await createGoodsImage(formData);
+      return response;
     },
     onSuccess: (data) => {
-      if (data.status === "SUCCESS") {
-        setResultImage(data.goodsImgUrl);
-        setUploadImgGroupId(data.uploadImgGroupId);
-        setToastOption({
-          type: "success",
-          show: true,
-          message: "굿즈 이미지 생성 완료!",
-          duration: 2000,
-        });
-      } else {
-        setToastOption({
-          type: "error",
-          show: true,
-          message: "굿즈 이미지 생성에 실패했습니다.",
-          duration: 2000,
-        });
-      }
+      setResultImage(data.goodsImgUrl);
+      setUploadImgGroupId(data.uploadImgGroupId);
+      setToastOption({
+        type: "success",
+        show: true,
+        message: "굿즈 이미지 생성 완료!",
+        duration: 2000,
+      });
     },
     onError: (error) => {
       console.error("굿즈 이미지 생성 실패 :", error);
