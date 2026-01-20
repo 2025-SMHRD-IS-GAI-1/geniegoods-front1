@@ -158,25 +158,15 @@ export default function MyPage() {
       const response = await updateNickname(nickname);
       return response;
     },
-    onSuccess: (data) => {
-      console.log("닉네임 변경 성공:", data);
-      if (data.status === "SUCCESS") {
-        setNickname(nickname);
-        setUser({ ...user, nickname: nickname });
-        setToastOption({
-          type: "success",
-          message: data.message || "닉네임이 변경되었습니다.",
-          show: true,
-          duration: 2000,
-        });
-      } else {
-        setToastOption({
-          type: "error",
-          message: data.message || "닉네임 변경에 실패했습니다.",
-          show: true,
-          duration: 2000,
-        });
-      }
+    onSuccess: (data) => { 
+      setNickname(nickname);
+      setUser({ ...user, nickname: nickname });
+      setToastOption({
+        type: "success",
+        message: data.message || "닉네임이 변경되었습니다.",
+        show: true,
+        duration: 2000,
+      });
     },
     onError: (error) => {
       console.error("닉네임 변경 실패:", error);
