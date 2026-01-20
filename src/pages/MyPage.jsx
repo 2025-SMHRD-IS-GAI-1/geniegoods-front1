@@ -23,7 +23,7 @@ export default function MyPage() {
   const { user, setUser } = useAuthStore();
   const [nickname, setNickname] = useState(user?.nickname || "");
   const [profileImage, setProfileImage] = useState(
-    user?.profileUrl || defaultProfileIcon
+    user?.profileUrl || defaultProfileIcon,
   );
   const [isUploading, setIsUploading] = useState(false);
   const [isNicknameAvailable, setIsNicknameAvailable] = useState(false);
@@ -108,7 +108,7 @@ export default function MyPage() {
       console.error("닉네임 중복확인 실패:", checkNicknameError);
       alert(
         checkNicknameError.response?.data?.message ||
-          "닉네임 중복확인에 실패했습니다."
+          "닉네임 중복확인에 실패했습니다.",
       );
       setIsNicknameAvailable(false);
     }
@@ -158,7 +158,7 @@ export default function MyPage() {
       const response = await updateNickname(nickname);
       return response;
     },
-    onSuccess: (data) => { 
+    onSuccess: (data) => {
       setNickname(nickname);
       setUser({ ...user, nickname: nickname });
       setToastOption({
@@ -239,14 +239,14 @@ export default function MyPage() {
       return response;
     },
     onSuccess: (data) => {
-        setProfileImage(data.profileUrl);
-        setUser({ ...user, profileUrl: data.profileUrl });
-        setToastOption({
-          type: "success",
-          message: data.message || "프로필 이미지가 업로드되었습니다.",
-          show: true,
-          duration: 2000,
-        });
+      setProfileImage(data.profileUrl);
+      setUser({ ...user, profileUrl: data.profileUrl });
+      setToastOption({
+        type: "success",
+        message: data.message || "프로필 이미지가 업로드되었습니다.",
+        show: true,
+        duration: 2000,
+      });
     },
     onError: (error) => {
       console.error("프로필 이미지 업로드 실패:", error);
@@ -317,7 +317,6 @@ export default function MyPage() {
   const handleCancelOrder = (orderId) => {
     // 주문 취소 로직 구현
     if (window.confirm("주문을 취소하시겠습니까?")) {
-      console.log("주문 취소:", orderId);
     }
   };
 

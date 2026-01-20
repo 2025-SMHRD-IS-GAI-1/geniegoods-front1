@@ -41,7 +41,7 @@ export default function BrowsePage() {
       const response = await selectGoodsData(
         selectedCategory === 0 ? null : selectedCategory,
         pageParam,
-        PAGE_SIZE
+        PAGE_SIZE,
       );
       return response;
     },
@@ -67,7 +67,6 @@ export default function BrowsePage() {
       return response;
     },
     onSuccess: (data) => {
-      console.log(data);
       setSelectedGoods(data);
     },
   });

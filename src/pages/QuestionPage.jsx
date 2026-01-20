@@ -45,7 +45,6 @@ export default function QuestionPage() {
     } else {
       setOpenIdList([...openIdList, id]);
     }
-    console.log(openIdList);
   };
 
   const handleBackToMain = () => {
