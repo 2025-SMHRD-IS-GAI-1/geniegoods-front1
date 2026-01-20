@@ -1,21 +1,21 @@
-import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { CameraIcon, CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 import defaultProfileIcon from "../assets/img/defaultProfileIcon.png";
 import {
-  uploadProfileImage,
-  withdrawUser,
   checkNicknameDuplicate,
   updateNickname,
+  uploadProfileImage,
+  withdrawUser,
 } from "../services/userService";
 
-import { selectRecentOrder } from "../services/orderService";
-import { useAuthStore } from "../stores/authStore";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import Toast from "../components/common/Toast";
+import { selectRecentOrder } from "../services/orderService";
+import { useAuthStore } from "../stores/authStore";
 
 export default function MyPage() {
   const navigate = useNavigate();

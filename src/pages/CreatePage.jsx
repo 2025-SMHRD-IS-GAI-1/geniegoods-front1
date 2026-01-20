@@ -1,14 +1,14 @@
-import { useState, useRef, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import starIcon from "../assets/img/starIcon.png";
-import { XMarkIcon, PaperAirplaneIcon } from "@heroicons/react/24/outline";
+import { PaperAirplaneIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useMutation } from "@tanstack/react-query";
-import { apiClient } from "../services/authService";
-import LoadingSpinner from "../components/common/LoadingSpinner";
-import Toast from "../components/common/Toast";
+import { useEffect, useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import IllustrationSample from "../assets/img/illustrationSample.png";
 import PaintingSample from "../assets/img/paintingSample.png";
 import RealisticSample from "../assets/img/realisticSample.png";
+import starIcon from "../assets/img/starIcon.png";
+import LoadingSpinner from "../components/common/LoadingSpinner";
+import Toast from "../components/common/Toast";
+import { apiClient } from "../services/authService";
 import { createGoodsImage } from "../services/goodsService";
 export default function CreatePage() {
   const navigate = useNavigate();
@@ -19,11 +19,11 @@ export default function CreatePage() {
   const goodsDetail = location.state?.goodsDetail || null;
 
   const [uploadedImages, setUploadedImages] = useState(
-    selectGoodsPageState?.uploadedImages || []
+    selectGoodsPageState?.uploadedImages || [],
   );
   const [uploadedImageFiles, setUploadedImageFiles] = useState([]); // File 객체 저장
   const [description, setDescription] = useState(
-    selectGoodsPageState?.description || ""
+    selectGoodsPageState?.description || "",
   );
   const [selectedOption, setSelectedOption] = useState(
     selectGoodsPageState?.selectedOption || {
@@ -31,10 +31,10 @@ export default function CreatePage() {
       style: "",
       color: "",
       mood: "",
-    }
+    },
   );
   const [resultImage, setResultImage] = useState(
-    selectGoodsPageState?.resultImage || null
+    selectGoodsPageState?.resultImage || null,
   );
 
   const [toastOption, setToastOption] = useState({
@@ -46,7 +46,7 @@ export default function CreatePage() {
 
   const fileInputRef = useRef(null);
   const [uploadImgGroupId, setUploadImgGroupId] = useState(
-    selectGoodsPageState?.uploadImgGroupId || null
+    selectGoodsPageState?.uploadImgGroupId || null,
   );
 
   const [hoveredStyle, setHoveredStyle] = useState(null);
@@ -79,7 +79,7 @@ export default function CreatePage() {
                     {
                       params: { url },
                       responseType: "blob", // 바이너리 데이터로 받기
-                    }
+                    },
                   );
                   const blob = response.data;
                   // URL에서 파일명 추출 시도, 없으면 기본값 사용
@@ -92,7 +92,7 @@ export default function CreatePage() {
                     "image/jpeg";
                   return new File([blob], fileName, { type: contentType });
                 }
-              }
+              },
             );
             const files = await Promise.all(filePromises);
             setUploadedImageFiles(files);
@@ -523,8 +523,8 @@ export default function CreatePage() {
                       hoveredStyle === "일러스트"
                         ? IllustrationSample
                         : hoveredStyle === "실사"
-                        ? RealisticSample
-                        : PaintingSample
+                          ? RealisticSample
+                          : PaintingSample
                     }
                     alt={hoveredStyle}
                     className="w-32 h-32 object-cover absolute -top-36 left-1/2 -translate-x-1/2 z-10 rounded-[16px]"

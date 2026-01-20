@@ -1,12 +1,12 @@
-import { useState, useEffect, useRef, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
 import { CheckIcon } from "@heroicons/react/24/outline";
-import { useAuthStore } from "../stores/authStore";
 import { useMutation } from "@tanstack/react-query";
-import { changeSubScribePlan } from "../services/subscribe";
-import PaymentModal from "../components/common/PaymentModal";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "../components/common/LoadingSpinner";
+import PaymentModal from "../components/common/PaymentModal";
 import Toast from "../components/common/Toast";
+import { changeSubScribePlan } from "../services/subscribe";
+import { useAuthStore } from "../stores/authStore";
 
 const baseSubscriptionPlans = [
   {
@@ -258,7 +258,7 @@ export default function SubscribePage() {
                 // 결제 성공 - 구독 플랜 변경
                 try {
                   changeSubScribePlanMutation.mutate(
-                    subscriptionPlanDataWithMethod
+                    subscriptionPlanDataWithMethod,
                   );
                 } catch (error) {
                   setToastOption({

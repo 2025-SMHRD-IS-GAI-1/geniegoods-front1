@@ -1,7 +1,7 @@
-import { socialLogin } from "../services/authService";
+import googleIcon from "../assets/img/googleIcon.png";
 import kakaoIcon from "../assets/img/kakaoIcon.png";
 import naverIcon from "../assets/img/naverIcon.png";
-import googleIcon from "../assets/img/googleIcon.png";
+import { socialLogin } from "../services/authService";
 
 export default function LoginPage() {
   const handleSocialLogin = (provider) => {

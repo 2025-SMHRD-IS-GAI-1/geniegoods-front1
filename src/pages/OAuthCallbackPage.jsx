@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useAuthStore } from "../stores/authStore";
 import { getCurrentUser } from "../services/authService";
+import { useAuthStore } from "../stores/authStore";
 
 /**
  * OAuth2 로그인 콜백 페이지

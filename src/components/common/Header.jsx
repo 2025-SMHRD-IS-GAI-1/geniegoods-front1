@@ -1,9 +1,9 @@
-import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuthStore } from "../../stores/authStore";
-import { logout, getCurrentUser } from "../../services/authService";
-import defaultProfileIcon from "../../assets/img/defaultProfileIcon.png";
 import XMarkIcon from "@heroicons/react/24/outline/XMarkIcon";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import defaultProfileIcon from "../../assets/img/defaultProfileIcon.png";
+import { logout } from "../../services/authService";
+import { useAuthStore } from "../../stores/authStore";
 
 export default function Header() {
   const navigate = useNavigate();

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import dogImage from "../assets/img/dog.png";
 import catImage from "../assets/img/cat.png";
+import dogImage from "../assets/img/dog.png";
 import personImage from "../assets/img/person.png";
 import resultImage from "../assets/img/result.png";
 import result1Image from "../assets/img/result1.png";

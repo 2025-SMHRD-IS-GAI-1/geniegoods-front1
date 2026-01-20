@@ -1,6 +1,6 @@
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
 
 // FAQ 데이터
 const faqData = [

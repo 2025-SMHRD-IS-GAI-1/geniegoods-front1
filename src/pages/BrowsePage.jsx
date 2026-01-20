@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { useAuthStore } from "../stores/authStore";
 import {
   useInfiniteQuery,
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { selectGoodsData, selectGoodsDetail } from "../services/goodsService";
+import { useAuthStore } from "../stores/authStore";
 
 const categories = [
   { id: 0, name: "전체" },

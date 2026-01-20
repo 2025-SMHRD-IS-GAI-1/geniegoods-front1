@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useAuthStore } from "./stores/authStore";
+import { useAuthStore, clearAuth } from "./stores/authStore";
 import { getCurrentUser } from "./services/authService";
 
 import Router from "./Router";
@@ -13,16 +13,17 @@ export default function App() {
 
     hasProcessed.current = true;
 
-    getCurrentUser().then((userData) => {
-      if (userData && typeof userData === "object" && userData.nickname) {
-        setUser(userData);
-      } else {
+    getCurrentUser()
+      .then((userData) => {
+        if (userData && typeof userData === "object" && userData.nickname) {
+          setUser(userData);
+        } else {
+          clearAuth();
+        }
+      })
+      .catch(() => {
         clearAuth();
-      }
-    })
-    .catch(() => {
-      clearAuth();
-    });
+      });
   }, []); // 빈 배열 : 마운트 시 한 번만 실행
   return <Router />;
 }

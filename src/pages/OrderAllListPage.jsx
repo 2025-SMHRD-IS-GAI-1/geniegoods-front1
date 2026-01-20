@@ -1,9 +1,9 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { selectAllOrders, cancelOrder } from "../services/orderService";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import Toast from "../components/common/Toast";
+import { cancelOrder, selectAllOrders } from "../services/orderService";
 
 export default function OrderAllListPage() {
   const navigate = useNavigate();
@@ -258,10 +258,10 @@ export default function OrderAllListPage() {
                             order.status === "배송완료"
                               ? "bg-green-100 text-green-700"
                               : order.status === "배송중"
-                              ? "bg-blue-100 text-blue-700"
-                              : order.status === "주문완료"
-                              ? "bg-yellow-100 text-yellow-700"
-                              : "bg-red-100 text-red-700"
+                                ? "bg-blue-100 text-blue-700"
+                                : order.status === "주문완료"
+                                  ? "bg-yellow-100 text-yellow-700"
+                                  : "bg-red-100 text-red-700"
                           }`}
                         >
                           {order.status}
