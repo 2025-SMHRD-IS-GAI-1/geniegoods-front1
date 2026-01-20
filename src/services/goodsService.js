@@ -154,6 +154,28 @@ export const selectAllMyGoods = async () => {
 };
 
 /**
+ * 오늘 생성한 굿즈 개수 조회
+ * @returns {Promise<number>} 오늘 생성한 굿즈 개수
+ */
+export const getTodayGoodsCount = async () => {
+  try {
+    const response = await apiClient.get("/api/goods/today-count");
+    return response.data.todayCount;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const errorMessage =
+        (typeof error.response?.data === "string"
+          ? error.response.data
+          : null) ||
+        error.message ||
+        "오늘 생성한 굿즈 개수 조회에 실패했습니다.";
+      throw new Error(errorMessage);
+    }
+    throw new Error("오늘 생성한 굿즈 개수 조회에 실패했습니다.");
+  }
+};
+
+/**
  * 내가 생성한 굿즈 삭제
  * @param {} goodsIds
  * @returns

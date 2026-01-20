@@ -15,7 +15,7 @@ const baseSubscriptionPlans = [
     price: "₩ 0",
     period: "/ month",
     icon: "🆓",
-    features: ["월 5개 굿즈 이미지 제한"],
+    features: ["하루 5개 굿즈 이미지 제한"],
     buttonText: "무료로 시작하기",
     isPopular: false,
   },

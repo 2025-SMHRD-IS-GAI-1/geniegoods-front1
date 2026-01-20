@@ -2,7 +2,13 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { apiClient } from "../services/authService";
-import { createGoodsSample, deleteSampleImg, selectGoods } from "../services/goodsService";
+import {
+  createGoodsSample,
+  deleteSampleImg,
+  selectGoods,
+  getTodayGoodsCount,
+} from "../services/goodsService";
+import { useAuthStore } from "../stores/authStore";
 
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import Toast from "../components/common/Toast";
@@ -11,6 +17,7 @@ import { ArrowDownTrayIcon } from "@heroicons/react/24/outline";
 export default function SelectGoodsPage() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { user } = useAuthStore();
 
   // CreatePage에서 전달받은 상태값
   const createPageState = location.state?.createPageState || null;
@@ -23,6 +30,14 @@ export default function SelectGoodsPage() {
     show: false,
     message: "",
     duration: 2000,
+  });
+
+  // 오늘 생성한 굿즈 개수 조회
+  const { data: todayCount } = useQuery({
+    queryKey: ["todayGoodsCount"],
+    queryFn: getTodayGoodsCount,
+    enabled: !!user && user.subscriptionPlan === "FREE",
+    refetchOnMount: "always",
   });
 
   // 시안 생성 mutation
@@ -41,7 +56,7 @@ export default function SelectGoodsPage() {
         }));
         setDesignSamples(samples);
         setSelectedDesign(
-          samples.find((d) => d.isSelected)?.id || samples[0]?.id
+          samples.find((d) => d.isSelected)?.id || samples[0]?.id,
         );
         setToastOption({
           type: "success",
@@ -158,6 +173,18 @@ export default function SelectGoodsPage() {
       return;
     }
 
+    // FREE 플랜 사용자의 경우 일일 5개 제한 체크
+    if (user && user.subscriptionPlan === "FREE" && todayCount >= 5) {
+      setToastOption({
+        type: "error",
+        show: true,
+        message:
+          "FREE 플랜은 하루에 5개까지만 생성할 수 있습니다. PRO 플랜으로 업그레이드하시면 무제한으로 생성할 수 있습니다.",
+        duration: 4000,
+      });
+      return;
+    }
+
     const requestBody = {
       resultImageUrl: createPageState.resultImage,
       sampleGoodsImageUrl: designSamples.map((d) => d.image),
@@ -179,24 +206,25 @@ export default function SelectGoodsPage() {
       return response;
     },
     onSuccess: (data) => {
-        navigate("/mygoods", {
-          state: {
-            toastOption: {
-              type: "success",
-              show: true,
-              message: "굿즈 선택 완료!",
-              duration: 2000,
-            },
+      navigate("/mygoods", {
+        state: {
+          toastOption: {
+            type: "success",
+            show: true,
+            message: "굿즈 선택 완료!",
+            duration: 2000,
           },
-        });
+        },
+      });
     },
     onError: (error) => {
       console.error("굿즈 선택 실패:", error);
+      const errorMessage = error.message || "굿즈 선택에 실패했습니다.";
       setToastOption({
         type: "error",
         show: true,
-        message: "굿즈 선택에 실패했습니다.",
-        duration: 2000,
+        message: errorMessage,
+        duration: errorMessage.includes("FREE 플랜") ? 4000 : 2000,
       });
     },
   });
@@ -216,7 +244,7 @@ export default function SelectGoodsPage() {
         `/api/goods/download-image?url=${imageUrl}`,
         {
           responseType: "blob",
-        }
+        },
       );
 
       const blob = response.data;
@@ -243,7 +271,7 @@ export default function SelectGoodsPage() {
   };
 
   return (
-    <div className="bg-[#f5f3f0] min-h-screen">
+    <div className="bg-[#f5f3f0] h-[calc(100vh-112px)]">
       {/* 로딩 스피너 */}
       {createGoodsSampleMutation.isPending && (
         <LoadingSpinner message="시안 생성 중..." position="top-right" />
@@ -270,6 +298,44 @@ export default function SelectGoodsPage() {
           <h1 className="text-[28px] font-semibold tracking-[-0.5px] text-[#2d2520] leading-[36px] mb-4">
             굿즈 시안 선택
           </h1>
+          {user && user.subscriptionPlan === "FREE" && (
+            <div className="flex flex-col items-center gap-2 mb-6">
+              {/* 진행률 바 */}
+              <div className="w-full max-w-md">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[16px] font-medium text-[#6b7280]">
+                    오늘 생성한 굿즈
+                  </span>
+                  <span
+                    className={`text-[16px] font-semibold ${
+                      todayCount >= 5
+                        ? "text-red-500"
+                        : todayCount >= 3
+                          ? "text-orange-500"
+                          : "text-[#6b7280]"
+                    }`}
+                  >
+                    {todayCount} / 5
+                  </span>
+                </div>
+                {/* 진행률 바 */}
+                <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                  <div
+                    className={`h-full transition-all duration-300 rounded-full ${
+                      todayCount >= 5
+                        ? "bg-red-500"
+                        : todayCount >= 3
+                          ? "bg-orange-500"
+                          : "bg-[#b89a7c]"
+                    }`}
+                    style={{
+                      width: `${Math.min((todayCount / 5) * 100, 100)}%`,
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
           <p className="text-[16px] text-[#6b7280] leading-[26px] tracking-[-0.3px]">
             AI 분석으로 더 귀여워진 반려동물 사진 시안을 선택해 굿즈를
             만들어보세요
