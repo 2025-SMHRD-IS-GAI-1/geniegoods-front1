@@ -99,18 +99,30 @@ export const getCurrentUser = async () => {
   try {
     const response = await apiClient.get("/api/user/me");
 
-    // 응답이 HTML인지 확인 (Spring Security가 로그인 페이지를 반환한 경우)
+    // Content-Type 확인
     const contentType = response.headers?.["content-type"] || "";
-    if (
-      typeof response.data === "string" &&
-      response.data.trim().startsWith("<!DOCTYPE")
-    ) {
+    if (contentType.includes("text/html")) {
       const authError = new Error("Unauthorized");
       authError.response = { status: 401 };
       authError.status = 401;
       throw authError;
     }
 
+    // 응답이 HTML인지 확인 (대소문자 구분 없이)
+    if (typeof response.data === "string") {
+      const trimmedData = response.data.trim();
+      if (
+        trimmedData.toLowerCase().startsWith("<!doctype") ||
+        trimmedData.toLowerCase().startsWith("<html") ||
+        trimmedData.startsWith("<!DOCTYPE")
+      ) {
+        const authError = new Error("Unauthorized");
+        authError.response = { status: 401 };
+        authError.status = 401;
+        throw authError;
+      }
+    }
+    
     return response.data;
   } catch (error) {
     // 401 에러는 인증되지 않은 상태이므로 그대로 전달
