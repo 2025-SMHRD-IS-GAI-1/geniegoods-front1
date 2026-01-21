@@ -19,7 +19,9 @@ export default function MainPage() {
               <h1 className="text-[44px] leading-[50px] text-[#2d2520] mb-2">
                 AI 시안 제작부터
                 <br />
-                <span className="text-[#8b7355]">굿즈 주문까지</span>
+                <span className="text-[#8b7355]">
+                  굿즈 주문까지 ci/cd 테스트
+                </span>
               </h1>
 
               <p className="text-[18px] text-[#4a5565] leading-[30px] mb-4">

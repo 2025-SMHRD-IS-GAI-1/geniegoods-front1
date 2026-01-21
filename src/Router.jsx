@@ -13,7 +13,6 @@ import OrderDetailPage from "./pages/OrderDetailPage";
 import QuestionPage from "./pages/QuestionPage";
 import OAuthCallbackPage from "./pages/OAuthCallbackPage";
 import SubscribePage from "./pages/SubscribePage";
-import DeployPage from "./pages/DeployPage";
 
 export default function AppRouter() {
   return (
@@ -21,7 +20,6 @@ export default function AppRouter() {
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/oauth/callback" element={<OAuthCallbackPage />} />
-        <Route path="/deploy" element={<DeployPage />} />
         <Route element={<MainLayout />}>
           <Route path="/" element={<MainPage />} />
           <Route path="/browse" element={<BrowsePage />} />
