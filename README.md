@@ -4,9 +4,9 @@
       <img src="https://github.com/user-attachments/assets/17a8e342-ee96-4d39-8cad-01d9b633284e" width="500" height="500" alt="꼬마손 로고">
     </td>
     <td style="border:none; text-align:right; vertical-align:middle;">
-      <b>팀장</b> - 한정훈
+      <b>팀장</b> - 김태현
       <br>
-      <b>팀원</b> - 김주성,  김태현,  홍유진
+      <b>팀원</b> - 이용일,  김다혜, 김태경, 한정훈
       <br><br><br>
        <b>프로젝트 기간</b>
        <br>
