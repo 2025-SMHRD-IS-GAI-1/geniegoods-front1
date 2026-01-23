@@ -240,7 +240,7 @@
 
 
 ## 11. 시연 영상
-([동영상 링크](https://youtu.be/hL2iqkVBzTc))
+([동영상 링크](https://youtu.be/z2ni7jIXqEU))
 
 
 <br>
