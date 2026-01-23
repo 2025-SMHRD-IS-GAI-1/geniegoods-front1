@@ -10,7 +10,7 @@
       <br><br><br>
        <b>프로젝트 기간</b>
        <br>
-      2025.10.31 ~ 2025.11.13
+      2025.12.30 ~ 2026.01.27
     </td>
   </tr>
 </table>
@@ -20,20 +20,20 @@
 
 
 ## 1. 서비스 소개
-### 주제 : Media-Pipe AI 모델에 기반한 수어 동작의 정확도를 측정하는수어 학습 플랫폼
-- 카메라로 사용자의 수어 동작을 실시간으로 인식하고, AI가 정확도와 자연스러움을 분석하는 기능 제공
-- 사용자는 AI 피드백을 통해 자신의 수어 실력을 객관적으로 평가하고 향상시킬 수 있음
-- 학습 결과를 시각적으로 확인하고, 개별 동작별 정확도 점수 및 개선 가이드 제공
+### 주제 : Google Gemini 2.5 Flash + YOLOv11 기반 사용자 맞춤 반려동물 굿즈 시안 자동 생성 및 주문 웹 서비스
+- 여러개의 이미지를 첨부하고 프롬프트 작성 및 키워드 클릭후 굿즈 이미지 생성
+- 굿즈 이미지와 비슷한 후보 2안 자동 생성.미리보기/다운로드
+- 굿즈 생성 후 (Toss Pay, Kakao Pay, 휴대폰 결제, 무통장 입금) 결제 및 주문 가능
 
-  
+
 <br>
 
 
 ## 2. 주요 기능
 
-- 기본 자모음 학습 컨텐츠 무료 제공 
-- MediaPipe AI 로 실시간 수어 인식 후 예측 및 정확도 표시 기능 구현
-- 랭킹 시스템을 통해 성취감과 지속적인 학습을 유도 
+- 객체탐지 및 이미지 생성/편집 기술을 결합하여, 사용자가 사진만 업로드해도 자동으로 재구성된 굿즈 시안을 볼수 있음
+- 사용자는 굿즈 후보 3안을 자동 생성.미리보기/다운로드 할수 있음
+- 생성된 굿즈를 주문까지 할 수 있는 편의성을 제공하여 굿즈 제작의 진입장벽을 낮춤
 
 
 <br>
@@ -47,21 +47,26 @@
   </tr>
 
   <tr>
-    <td><b>기본 사용언어</b></td>
+    <td><b>FrontEnd</b></td>
     <td>
-      <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white"/> 
-      <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white"/> 
-      <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+      <img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB">
+      <img src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E">
+      <img src="https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white">
+      <img src="https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white">
+      <img src="https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white">
     </td>
   </tr>
 
-
   <tr>
-    <td><b>Backend 프레임워크</b></td>
+    <td><b>Backend</b></td>
     <td>
-      <img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white">
+      <img src="https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white">
       <img src="https://img.shields.io/badge/Apache Tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=black">
-      <img src="https://img.shields.io/badge/JSP & Servlets-000000?style=for-the-badge&logo=java&logoColor=white">
+      <img src="https://img.shields.io/badge/springsecurity-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white">
+      <img src="https://img.shields.io/badge/OAuth2-Authorization-000000" />
+      <img src="https://img.shields.io/badge/JWT-Token-000000" />
+      <img src="https://img.shields.io/badge/Swagger-85EA2D?logo=swagger&logoColor=black" />
+      <img src="https://img.shields.io/badge/JPA%2FHibernate-59666C?logo=hibernate&logoColor=white" />
     </td>
   </tr>
 
@@ -69,7 +74,8 @@
     <td><b>개발도구</b></td>
     <td>
       <img src="https://img.shields.io/badge/Eclipse-2C2255?style=for-the-badge&logo=Eclipse&logoColor=white"/> 
-      <img src="https://img.shields.io/badge/Google Colab-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white"/> 
+      <img src="https://img.shields.io/badge/Google Colab-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white"/>
+      
     </td>
   </tr>
 
