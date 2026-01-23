@@ -77,7 +77,7 @@
     <td><b>모델</b></td>
     <td>
       <img src="https://img.shields.io/badge/YOLO11-Ultralytics-00FFFF?style=flat&logo=yolo" />
-      
+      <span>Nano Banana</span>
     </td>
   </tr>
 
@@ -126,7 +126,7 @@
 
 
 ## 4. 시스템 아키텍쳐
-<img width="740" height="341" alt="image" src="https://github.com/user-attachments/assets/ca8c5d41-7f83-4153-bae7-4954558a99cd" />
+![Image](https://github.com/user-attachments/assets/dd048114-6147-49d4-b444-51a4560a058e)
 
 
 <br>
