@@ -1,7 +1,7 @@
 <table style="border:none; width:100%;">
   <tr style="border:none;">
     <td style="border:none; vertical-align:middle;">
-      <img src="https://github.com/user-attachments/assets/17a8e342-ee96-4d39-8cad-01d9b633284e" width="500" height="500" alt="꼬마손 로고">
+      <img width="361" height="107" alt="Image" src="https://github.com/user-attachments/assets/bb57ba9c-27c7-4427-a148-32c0d378d0f8" />
     </td>
     <td style="border:none; text-align:right; vertical-align:middle;">
       <b>팀장</b> - 김태현
