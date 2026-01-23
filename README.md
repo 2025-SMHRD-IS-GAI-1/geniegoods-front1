@@ -133,28 +133,21 @@
 
 
 ## 5. 유스케이스
-<img width="869" height="593" alt="image" src="https://github.com/user-attachments/assets/fb9f5902-df6f-4941-ae9e-7c69dba54cd4" />
+<img width="788" height="567" alt="Image" src="https://github.com/user-attachments/assets/1d32fcab-8b71-4a2c-b5da-abd74d1ae772" />
 
 
 <br>
 
 
 ## 6. 서비스 흐름도
-#### 6-1 회원가입 / 로그인
-<img width="912" height="572" alt="image" src="https://github.com/user-attachments/assets/6ad51630-8bca-46e8-a276-9f3b5e0ba180" />
-
-#### 6-2 아이디 / 비밀번호 찾기
-<img width="890" height="564" alt="image" src="https://github.com/user-attachments/assets/7f6fda87-622f-460d-b0a8-5f478ebf65ed" />
-
-#### 6-2 메인 / 학습
-<img width="945" height="464" alt="image" src="https://github.com/user-attachments/assets/27a7581d-033d-4485-828a-2a37ec06f209" />
+<img width="995" height="691" alt="Image" src="https://github.com/user-attachments/assets/33925fd8-48e5-403c-a582-e351e5071524" />
 
 
 <br>
 
 
 ## 7. ER 다이어그램
-<img width="839" height="233" alt="image" src="https://github.com/user-attachments/assets/a2bea3e5-be24-4eca-9a9d-4f3a544404a4" />
+<img width="1026" height="592" alt="Image" src="https://github.com/user-attachments/assets/ebb5b51d-d430-4117-af38-8baecdba36aa" />
 
 
 
@@ -163,22 +156,19 @@
 
 ## 8. 주요 화면 구성
 #### 로그인
-<img width="1416" height="916" alt="image" src="https://github.com/user-attachments/assets/1cfce9ad-d5fc-43fb-ac0b-32d819e7c2fa" />
+<img width="1089" height="729" alt="Image" src="https://github.com/user-attachments/assets/858ad166-19b5-4e20-96d9-ac9f3cecaf5a" />
 
 #### 메인 화면
-<img width="1416" height="919" alt="image" src="https://github.com/user-attachments/assets/86c316e5-0cab-49ea-ac2c-6a7f939c4d13" />
+<img width="1901" height="950" alt="Image" src="https://github.com/user-attachments/assets/ffff9ef2-cdc1-463d-a4bf-8d28248b23c5" />
 
-#### 학습하기
-<img width="1416" height="917" alt="image" src="https://github.com/user-attachments/assets/b6db8528-067f-459f-b5e2-a78d899076e8" />
+#### 굿즈 만들기
+
 
 #### 테스트
-<img width="1415" height="917" alt="image" src="https://github.com/user-attachments/assets/a0193834-f22d-4fdf-ae27-b5d8ca43a494" />
 
 #### 랭킹
-<img width="1417" height="914" alt="image" src="https://github.com/user-attachments/assets/baf62303-478b-445e-92cc-797ef1f84b02" />
 
 #### 지난 학습 결과
-<img width="1417" height="916" alt="image" src="https://github.com/user-attachments/assets/07bb57f7-d1de-4306-9b96-017e149f1954" />
 
 
 <br>
@@ -192,7 +182,6 @@
 
 
 ## 10. 트러블 슈팅
-
 <img width="1033" height="548" alt="image" src="https://github.com/user-attachments/assets/c6058909-6776-4d0e-9aa4-cd565ec18491" />
 
 
