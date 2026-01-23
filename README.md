@@ -162,27 +162,78 @@
 <img width="1901" height="950" alt="Image" src="https://github.com/user-attachments/assets/ffff9ef2-cdc1-463d-a4bf-8d28248b23c5" />
 
 #### 굿즈 만들기
+<img width="1393" height="885" alt="Image" src="https://github.com/user-attachments/assets/e18e7fa9-4bc6-4a2f-b0ae-aa7ebb236464" />
 
+#### 굿즈 시안 선택
+<img width="1388" height="944" alt="Image" src="https://github.com/user-attachments/assets/fe23535c-5d56-4ddc-b601-20299a23341a" />
 
-#### 테스트
+#### 내가 생성한 굿즈
+<img width="1555" height="840" alt="Image" src="https://github.com/user-attachments/assets/d7a15813-cb4e-4a80-93d0-0b4c2b5130d7" />
 
-#### 랭킹
-
-#### 지난 학습 결과
-
+#### 결제
+<img width="792" height="738" alt="Image" src="https://github.com/user-attachments/assets/abbbf7a7-5af7-45c1-a41e-905f83430fb6" />
 
 <br>
 
-
 ## 9. 팀원 역할
-<img width="1030" height="556" alt="image" src="https://github.com/user-attachments/assets/8373cc63-58a1-4ab8-a86a-54ddaad51650" />
-
+<table>
+  <tr>
+    <th>이름</th>
+    <th>역할</th>
+    <th>담당</th>
+  </tr>
+  <tr>
+    <td>김태현</td>
+    <td>PM, AI Modeling</td>
+    <td>
+      <p>YOLOv11-seg 추론/후처리 튜닝</p>
+      <p>카테고리별 규격 프롬프트 가드레일 설계</p>
+    </td>
+  </tr>
+  <tr>
+    <td>한정훈</td>
+    <td>Full-Stack, Cloud</td>
+    <td>
+      <p>Front-Back API 구현 및 연동</p>
+      <p>Docker Compose 활용 빌드 및 NCP 서버 배포</p>
+      <p>Github actions 이용 CI/CD 파이프라인 구축</p>
+    </td>
+  </tr>
+  <tr>
+    <td>김태경</td>
+    <td>Back-End</td>
+    <td>
+      <p>굿즈, 주문 관련 페이지</p>
+      <p>기능 구현 및 API 연동</p>
+    </td>
+  </tr>
+  <tr>
+    <td>이용일</td>
+    <td>서비스 기획,문서화</td>
+    <td>
+      <p>서비스 기획 및 요구사항 정의</p>
+      <p>기획 산출물 문서화</p>
+    </td>
+  </tr>
+  <tr>
+    <td>김다혜</td>
+    <td>
+      <p>UI/UX Design</p>
+      <p>Publishing</p>
+    </td>
+    <td>
+      <p>Figma 기반 전체 페이지 UI/UX 설계</p>
+      <p>Figma 시안 기준</p>
+      <p>웹 스타일,CSS 구현</p>
+    </td>
+  </tr>
+</table>
 
 <br>
 
 
 ## 10. 트러블 슈팅
-<img width="1033" height="548" alt="image" src="https://github.com/user-attachments/assets/c6058909-6776-4d0e-9aa4-cd565ec18491" />
+<img width="1070" height="600" alt="Image" src="https://github.com/user-attachments/assets/cc89c8c6-629f-48af-a626-17383ad9fc6c" />
 
 
 <br>
