@@ -195,6 +195,9 @@
     <td>Full-Stack, Cloud</td>
     <td>
       <p>Front-Back API 구현 및 연동</p>
+      <p>Object Storage 이용 이미지 저장</p>
+      <p>Swagger 이용 API명세서 작성</p>
+      <p>Spring Batch 활용 Scheduler 등록</p>
       <p>Docker Compose 활용 빌드 및 NCP 서버 배포</p>
       <p>Github actions 이용 CI/CD 파이프라인 구축</p>
     </td>
